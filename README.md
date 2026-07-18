@@ -18,6 +18,15 @@ Stripe onboarding might ask for a VAT number under "additional information" - le
 
 Sends to ethansinclair123456789@gmail.com through web3forms.com. Access key is already set in `WEB3FORMS_KEY` near the bottom of index.html, so this is live - submissions land straight in the inbox.
 
+## Images to add
+
+All of these just need to exist in the same folder as index.html, same filename, and they'll show up automatically on next push. Until added, they'll show as a broken image icon.
+
+- `hero-tea.jpg` - the big circle photo up top
+- `creator.jpg` - Zita's photo in the Meet Zita section
+- `tea-bg.jpg` - background photo behind the About section
+- `white-tea.jpg`, `green-tea.jpg`, `oolong-tea.jpg`, `black-tea.jpg`, `puerh-tea.jpg`, `herbal-tea.jpg` - one per product card, matches each tea's type
+
 ## Deploying changes
 
 ```
@@ -36,4 +45,4 @@ Pages redeploys automatically after a push, usually within a minute.
 - write real privacy + shipping/returns pages (footer links are placeholders)
 - sort sales tax / Stripe Tax
 - replace the footer email/address with real ones
-- photos are illustrated discs for now instead of real product shots, can swap in real ones whenever
+- add the real photos (see Images to add above)

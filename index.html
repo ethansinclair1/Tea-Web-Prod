@@ -10,15 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:            #11201A;
-    --bg-panel:      #172A21;
-    --bg-panel-2:    #1E3628;
-    --line:          rgba(216,232,210,0.12);
-    --ink:           #E8F1E1;
-    --ink-dim:       #A9C2A3;
-    --ink-faint:     #758F75;
-    --accent:        #7FB56A;
-    --accent-soft:   rgba(127,181,106,0.16);
+    --bg:            #F2F9EE;
+    --bg-panel:      #E6F3DE;
+    --bg-panel-2:    #D9EBCC;
+    --line:          rgba(30,60,25,0.14);
+    --ink:           #23361F;
+    --ink-dim:       #4F6E4C;
+    --ink-faint:     #7C9679;
+    --accent:        #4C9A44;
+    --accent-soft:   rgba(76,154,68,0.14);
   }
 
   *{ box-sizing:border-box; }
@@ -35,8 +35,8 @@
     position:fixed; inset:0;
     pointer-events:none;
     background-image:
-      radial-gradient(circle at 20% 10%, rgba(127,181,106,0.06), transparent 40%),
-      radial-gradient(circle at 85% 60%, rgba(127,181,106,0.05), transparent 45%);
+      radial-gradient(circle at 20% 10%, rgba(76,154,68,0.07), transparent 40%),
+      radial-gradient(circle at 85% 60%, rgba(76,154,68,0.06), transparent 45%);
     z-index:0;
   }
   h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
@@ -51,7 +51,7 @@
   /* ---------- Nav ---------- */
   header{
     position:sticky; top:0; z-index:20;
-    background:rgba(17,32,26,0.88);
+    background:rgba(242,249,238,0.88);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
@@ -62,7 +62,7 @@
   .logo{ display:flex; align-items:center; gap:10px; font-size:1.05rem; }
   .logo-mark{
     width:26px; height:26px; border-radius:50%;
-    background:conic-gradient(from 210deg, #CFE7B9, #7FB56A, #24391F, #CFE7B9);
+    background:conic-gradient(from 210deg, #EAF6E0, #6FBE5E, #2F6B2A, #EAF6E0);
     box-shadow:0 0 0 1px var(--line);
   }
   .logo b{ font-family:'Fraunces', serif; font-weight:600; font-size:1.1rem; letter-spacing:0.01em; }
@@ -99,27 +99,23 @@
   }
   .btn:hover{ transform:translateY(-1px); }
   .btn-primary{ background:var(--accent); color:var(--bg); }
-  .btn-primary:hover{ background:#96c982; }
+  .btn-primary:hover{ background:#3E8438; }
   .btn-ghost{ border-color:var(--line); color:var(--ink); }
   .btn-ghost:hover{ border-color:var(--accent); color:var(--accent); }
 
-  /* Hero disc — large signature brew disc */
+  /* Hero disc — framed tea photo */
   .hero-disc-wrap{ display:flex; justify-content:center; align-items:center; position:relative; }
   .hero-disc{
     width:min(340px, 80vw); height:min(340px, 80vw); border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, #E8D9A0 0%, #C97C3D 42%, #7A2E22 78%, #4A2E1E 100%);
-    box-shadow:0 0 0 1px var(--line), 0 40px 80px -20px rgba(0,0,0,0.6), inset 0 0 60px rgba(0,0,0,0.25);
+    overflow:hidden; background:var(--bg-panel-2);
+    box-shadow:0 0 0 1px var(--line), 0 40px 80px -20px rgba(30,60,25,0.25);
     position:relative;
-    animation:steep-shift 14s ease-in-out infinite;
   }
-  @keyframes steep-shift{
-    0%,100%{ filter:hue-rotate(0deg) brightness(1); }
-    50%{ filter:hue-rotate(8deg) brightness(1.04); }
-  }
+  .hero-disc img{ width:100%; height:100%; object-fit:cover; display:block; }
   .hero-disc::after{
     content:"";
     position:absolute; inset:0; border-radius:50%;
-    background:radial-gradient(circle at 50% 15%, rgba(255,255,255,0.18), transparent 40%);
+    background:radial-gradient(circle at 50% 15%, rgba(255,255,255,0.22), transparent 40%);
   }
   .steam{ position:absolute; opacity:0.55; }
   .steam path{ stroke:var(--ink); stroke-width:1.4; fill:none; stroke-linecap:round; }
@@ -162,13 +158,15 @@
 
   .card-top{ display:flex; gap:20px; align-items:flex-start; }
 
-  /* brew disc */
+  /* tea photo */
   .disc-wrap{ position:relative; flex:none; width:76px; height:76px; }
   .disc{
-    width:76px; height:76px; border-radius:50%;
-    box-shadow:0 0 0 1px var(--line), inset 0 0 14px rgba(0,0,0,0.3);
+    width:76px; height:76px; border-radius:50%; overflow:hidden;
+    background:var(--bg-panel-2);
+    box-shadow:0 0 0 1px var(--line);
     position:relative;
   }
+  .disc img{ width:100%; height:100%; object-fit:cover; display:block; }
   .disc-ring{ position:absolute; inset:-7px; }
   .disc-ring circle{ fill:none; stroke:var(--line); stroke-width:2; }
   .disc-ring circle.progress{ stroke:var(--accent); stroke-linecap:round; transition:stroke-dasharray 0.4s; }
@@ -208,7 +206,7 @@
   /* ---------- About ---------- */
   .about{
     padding:110px 0; border-top:1px solid var(--line);
-    background-image: linear-gradient(rgba(17,32,26,0.90), rgba(17,32,26,0.90)), url('tea-bg.jpg');
+    background-image: linear-gradient(rgba(242,249,238,0.90), rgba(242,249,238,0.90)), url('tea-bg.jpg');
     background-size:cover; background-position:center;
   }
   .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; }
@@ -289,7 +287,7 @@
     <div>
       <span class="eyebrow">Small-batch · loose leaf · steeped to order</span>
       <h1>Nothing here is <em>rushed.</em></h1>
-      <p class="lede">Six teas, each shown by the colour it actually turns in the cup — not a stock photo.</p>
+      <p class="lede">Six teas, picked in small batches and steeped one cup at a time.</p>
       <div class="hero-ctas">
         <a href="#buy" class="btn btn-primary">Buy now</a>
         <a href="#about" class="btn btn-ghost">How we source</a>
@@ -297,6 +295,7 @@
     </div>
     <div class="hero-disc-wrap">
       <div class="hero-disc">
+        <img src="hero-tea.jpg" alt="Tea">
         <svg class="steam s1" viewBox="0 0 20 40"><path d="M4 40 C 14 30, -4 20, 10 10 C 18 4, 8 -2, 12 -8"/></svg>
         <svg class="steam s2" viewBox="0 0 20 40"><path d="M4 40 C 14 30, -4 20, 10 10 C 18 4, 8 -2, 12 -8"/></svg>
         <svg class="steam s3" viewBox="0 0 20 40"><path d="M4 40 C 14 30, -4 20, 10 10 C 18 4, 8 -2, 12 -8"/></svg>
@@ -309,7 +308,7 @@
   <div class="wrap">
     <div class="ritual-item">
       <span class="num mono">01</span>
-      <div><h3>Pick a leaf</h3><p>Each card shows the true liquor color and the exact steep time as a ring around it.</p></div>
+      <div><h3>Pick a leaf</h3><p>Each card shows a photo of the tea and the exact steep time as a ring around it.</p></div>
     </div>
     <div class="ritual-item">
       <span class="num mono">02</span>
@@ -415,72 +414,72 @@ const PRODUCTS = [
   {
     name: "Tea One",
     type: "White tea",
+    image: "white-tea.jpg",
     tagline: "Add a short tagline here.",
     desc: "Describe this tea here — flavour notes, what makes it different.",
     price: 14, weight: "50g",
     temp: "175°F", time: "4 min", leaf: "2g / 8oz",
     caffeine: 1, steepMinutes: 4,
-    color: ["#EFE0AE", "#E8D9A0", "#D8C077"],
     stripeLink: "REPLACE_ME_TEA_ONE"
   },
   {
     name: "Tea Two",
     type: "Green tea",
+    image: "green-tea.jpg",
     tagline: "Add a short tagline here.",
     desc: "Describe this tea here — flavour notes, what makes it different.",
     price: 12, weight: "50g",
     temp: "175°F", time: "2 min", leaf: "2g / 8oz",
     caffeine: 2, steepMinutes: 2,
-    color: ["#B9CE86", "#9CB86E", "#7E9C55"],
     stripeLink: "REPLACE_ME_TEA_TWO"
   },
   {
     name: "Tea Three",
     type: "Oolong tea",
+    image: "oolong-tea.jpg",
     tagline: "Add a short tagline here.",
     desc: "Describe this tea here — flavour notes, what makes it different.",
     price: 16, weight: "50g",
     temp: "195°F", time: "3 min", leaf: "3g / 8oz",
     caffeine: 2, steepMinutes: 3,
-    color: ["#EBC97A", "#D9A94A", "#B98632"],
     stripeLink: "REPLACE_ME_TEA_THREE"
   },
   {
     name: "Tea Four",
     type: "Black tea",
+    image: "black-tea.jpg",
     tagline: "Add a short tagline here.",
     desc: "Describe this tea here — flavour notes, what makes it different.",
     price: 13, weight: "50g",
     temp: "205°F", time: "4 min", leaf: "2.5g / 8oz",
     caffeine: 3, steepMinutes: 4,
-    color: ["#D08A3C", "#B5551F", "#8E4117"],
     stripeLink: "REPLACE_ME_TEA_FOUR"
   },
   {
     name: "Tea Five",
     type: "Pu-erh tea",
+    image: "puerh-tea.jpg",
     tagline: "Add a short tagline here.",
     desc: "Describe this tea here — flavour notes, what makes it different.",
     price: 18, weight: "50g cake",
     temp: "205°F", time: "30 sec", leaf: "5g / 8oz",
     caffeine: 2, steepMinutes: 1,
-    color: ["#8A6242", "#5A3A22", "#3E2716"],
     stripeLink: "REPLACE_ME_TEA_FIVE"
   },
   {
     name: "Tea Six",
     type: "Herbal blend",
+    image: "herbal-tea.jpg",
     tagline: "Add a short tagline here.",
     desc: "Describe this tea here — flavour notes, what makes it different.",
     price: 11, weight: "50g",
     temp: "212°F", time: "6 min", leaf: "2g / 8oz",
     caffeine: 0, steepMinutes: 6,
-    color: ["#E8C2C0", "#D9A6A0", "#BD8580"],
     stripeLink: "REPLACE_ME_TEA_SIX"
   }
 ];
 
-function discRingSVG(steepMinutes, ringColor){
+function discRingSVG(steepMinutes){
   const max = 6;
   const r = 38, c = 2 * Math.PI * r;
   const filled = Math.min(steepMinutes / max, 1) * c;
@@ -488,7 +487,6 @@ function discRingSVG(steepMinutes, ringColor){
     <svg class="disc-ring" viewBox="0 0 90 90">
       <circle cx="45" cy="45" r="${r}"></circle>
       <circle class="progress" cx="45" cy="45" r="${r}"
-        stroke="${ringColor}"
         stroke-dasharray="${filled} ${c}"
         transform="rotate(-90 45 45)"></circle>
     </svg>`;
@@ -503,14 +501,12 @@ function caffeineDots(level){
 }
 
 function productCard(p){
-  const [c1, c2, c3] = p.color;
-  const gradient = `radial-gradient(circle at 35% 30%, ${c1} 0%, ${c2} 55%, ${c3} 100%)`;
   return `
     <article class="card">
       <div class="card-top">
         <div class="disc-wrap">
-          <div class="disc" style="background:${gradient}"></div>
-          ${discRingSVG(p.steepMinutes, c2)}
+          <div class="disc"><img src="${p.image}" alt="${p.type}"></div>
+          ${discRingSVG(p.steepMinutes)}
         </div>
         <div class="card-title">
           <span class="type">${p.type}</span>
