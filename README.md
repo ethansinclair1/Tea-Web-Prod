@@ -20,12 +20,17 @@ Sends to ethansinclair123456789@gmail.com through web3forms.com. Access key is a
 
 ## Images to add
 
-All of these just need to exist in the same folder as index.html, same filename, and they'll show up automatically on next push. Until added, they'll show as a broken image icon.
+Drop these straight into the Tea Web folder, next to index.html, exact filenames below. They'll show up automatically next push - until then they show as a broken image icon.
 
-- `hero-tea.jpg` - the big circle photo up top
-- `creator.jpg` - Zita's photo in the Meet Zita section
-- `tea-bg.jpg` - background photo behind the About section
-- `white-tea.jpg`, `green-tea.jpg`, `oolong-tea.jpg`, `black-tea.jpg`, `puerh-tea.jpg`, `herbal-tea.jpg` - one per product card, matches each tea's type
+- `hero-tea.jpeg` - the big circle photo at the top of the page
+- `creator.jpeg` - Zita's photo in the Meet Zita section
+- `tea-bg.jpeg` - background photo behind the About section
+- `prod1.jpeg` - Tea One (white tea)
+- `prod2.jpeg` - Tea Two (green tea)
+- `prod3.jpeg` - Tea Three (oolong tea)
+- `prod4.jpeg` - Tea Four (black tea)
+- `prod5.jpeg` - Tea Five (pu-erh tea)
+- `prod6.jpeg` - Tea Six (herbal blend)
 
 ## Deploying changes
 
