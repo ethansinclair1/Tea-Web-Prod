@@ -244,7 +244,9 @@
   }
   .contact-form textarea{ resize:vertical; }
   .contact-form button{ align-self:flex-start; }
-  .form-note{ color:var(--ink-faint); font-size:0.8rem; margin:0; }
+  .form-note{ color:var(--ink-faint); font-size:0.85rem; margin:0; min-height:1.2em; }
+  .form-note.success{ color:var(--gold); font-weight:600; }
+  .form-note.error{ color:#D97A6C; font-weight:600; }
 
   /* ---------- Footer ---------- */
   footer{ border-top:1px solid var(--line); background:var(--bg-panel); padding:56px 0 32px; }
@@ -568,6 +570,7 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
 
   const data = new FormData(form);
   data.append("access_key", WEB3FORMS_KEY);
+  status.className = "form-note";
   status.textContent = "Sending...";
 
   try {
@@ -575,11 +578,14 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
     const result = await res.json();
     if (result.success){
       form.reset();
-      status.textContent = "Message sent, we'll get back to you soon.";
+      status.className = "form-note success";
+      status.textContent = "Message sent — we'll get back to you soon.";
     } else {
+      status.className = "form-note error";
       status.textContent = `Couldn't send that, please email us directly at ${CONTACT_EMAIL}.`;
     }
   } catch {
+    status.className = "form-note error";
     status.textContent = `Couldn't send that, please email us directly at ${CONTACT_EMAIL}.`;
   }
 });
