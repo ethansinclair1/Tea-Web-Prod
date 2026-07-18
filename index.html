@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zita's Teas — Small-batch loose leaf tea</title>
 <meta name="description" content="Small-batch loose leaf tea, steeped one cup at a time. White, green, oolong, black, pu-erh, and caffeine-free blends.">
+<link rel="icon" type="image/jpeg" href="prod1.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -192,6 +193,17 @@
   .qty-btn:hover{ background:var(--accent); color:var(--bg); }
   .qty-count{ font-family:'IBM Plex Mono', monospace; font-size:0.95rem; min-width:1.2em; text-align:center; }
 
+  /* ---------- Instructions ---------- */
+  .instructions{ padding:90px 0; border-top:1px solid var(--line); background:var(--bg-panel); }
+  .steps{
+    list-style:none; margin:0; padding:0;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:32px;
+  }
+  .steps li{ display:flex; gap:14px; }
+  .steps .num{ font-family:'IBM Plex Mono', monospace; color:var(--accent); font-size:0.85rem; padding-top:2px; }
+  .steps h3{ font-size:1rem; font-weight:600; font-family:'Work Sans', sans-serif; margin-bottom:4px; }
+  .steps p{ margin:0; color:var(--ink-dim); font-size:0.9rem; line-height:1.55; }
+
   /* ---------- About ---------- */
   .about{
     padding:110px 0; border-top:1px solid var(--line);
@@ -262,6 +274,7 @@
     </a>
     <div class="nav-links">
       <ul>
+        <li><a href="#instructions">Instructions</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#creator">Creator</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -329,6 +342,34 @@
   </div>
 </section>
 
+<section class="instructions" id="instructions">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow mono">How to brew</span>
+      <h2>Instructions</h2>
+      <p>The same basic method works for every tea here — just adjust water temperature, leaf amount, and steep time to what's listed on each card.</p>
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="num mono">01</span>
+        <div><h3>Heat your water</h3><p>Use the temperature listed for your tea — off the boil for delicate teas, fully boiling for robust ones.</p></div>
+      </li>
+      <li>
+        <span class="num mono">02</span>
+        <div><h3>Measure your leaf</h3><p>Use the leaf amount listed per card, usually per 8oz (about one cup) of water.</p></div>
+      </li>
+      <li>
+        <span class="num mono">03</span>
+        <div><h3>Steep</h3><p>Time it to the steep time listed — the ring on each card's photo shows this at a glance.</p></div>
+      </li>
+      <li>
+        <span class="num mono">04</span>
+        <div><h3>Strain and enjoy</h3><p>Remove the leaves so the tea doesn't turn bitter, then drink while it's hot.</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
 <section class="about" id="about">
   <div class="wrap about-grid">
     <div>
@@ -388,6 +429,7 @@
         <h4>Explore</h4>
         <ul>
           <li><a href="#buy">Buy</a></li>
+          <li><a href="#instructions">Instructions</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#creator">Creator</a></li>
         </ul>
