@@ -70,8 +70,17 @@
   nav ul{ list-style:none; display:flex; gap:32px; margin:0; padding:0; font-size:0.92rem; }
   nav ul a{ text-decoration:none; color:var(--ink-dim); transition:color 0.2s; }
   nav ul a:hover{ color:var(--accent); }
-  .nav-links{ display:flex; align-items:center; gap:32px; }
+  .nav-links{ display:flex; align-items:center; gap:24px; }
   @media (max-width:720px){ .nav-links ul{ display:none; } }
+  .cart-link{ position:relative; display:inline-flex; align-items:center; color:var(--ink); text-decoration:none; }
+  .cart-link:hover{ color:var(--accent); }
+  .cart-badge{
+    position:absolute; top:-8px; right:-10px;
+    background:var(--accent); color:var(--bg);
+    font-family:'IBM Plex Mono', monospace; font-size:0.62rem; font-weight:600;
+    min-width:16px; height:16px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; padding:0 3px;
+  }
 
   /* ---------- Leaf decorations ---------- */
   .leaf-deco{ position:absolute; z-index:0; opacity:0.16; pointer-events:none; }
@@ -80,8 +89,7 @@
 
   /* ---------- Hero ---------- */
   .hero{ position:relative; padding:96px 0 80px; overflow:hidden; }
-  .hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center; }
-  @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
+  .hero-grid{ position:relative; z-index:1; max-width:640px; }
   .eyebrow{
     font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.16em;
     text-transform:uppercase; color:var(--accent); margin-bottom:18px; display:block;
@@ -107,32 +115,6 @@
   .btn-primary:hover{ background:#5A8A4A; }
   .btn-ghost{ border-color:var(--line); color:var(--ink); }
   .btn-ghost:hover{ border-color:var(--accent); color:var(--accent); }
-
-  /* Hero disc — framed tea photo */
-  .hero-disc-wrap{ display:flex; justify-content:center; align-items:center; position:relative; }
-  .hero-disc{
-    width:min(340px, 80vw); height:min(340px, 80vw); border-radius:50%;
-    overflow:hidden; background:var(--bg-panel-2);
-    box-shadow:0 0 0 1px var(--line), 0 40px 80px -20px rgba(43,54,38,0.25);
-    position:relative;
-  }
-  .hero-disc img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .hero-disc::after{
-    content:"";
-    position:absolute; inset:0; border-radius:50%;
-    background:radial-gradient(circle at 50% 15%, rgba(255,255,255,0.22), transparent 40%);
-  }
-  .steam{ position:absolute; opacity:0.55; }
-  .steam path{ stroke:var(--ink); stroke-width:1.4; fill:none; stroke-linecap:round; }
-  .steam.s1{ top:-46px; left:38%; width:26px; animation:rise 6s ease-in-out infinite; }
-  .steam.s2{ top:-56px; left:52%; width:22px; animation:rise 6s ease-in-out infinite 1.6s; }
-  .steam.s3{ top:-40px; left:46%; width:20px; animation:rise 6s ease-in-out infinite 3.2s; }
-  @keyframes rise{
-    0%{ transform:translateY(0); opacity:0; }
-    15%{ opacity:0.6; }
-    85%{ opacity:0; }
-    100%{ transform:translateY(-26px); opacity:0; }
-  }
 
   /* ---------- Ritual strip ---------- */
   .ritual{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-panel); }
@@ -200,13 +182,15 @@
   .caff .dot{ width:5px; height:5px; border-radius:50%; background:var(--line); }
   .caff .dot.on{ background:var(--accent); }
 
-  .buy-btn{
-    font-family:'Work Sans',sans-serif; font-weight:600; font-size:0.85rem;
-    background:transparent; border:1px solid var(--accent); color:var(--accent);
-    padding:10px 20px; border-radius:2px; cursor:pointer; text-decoration:none;
+  .qty-control{ display:flex; align-items:center; gap:10px; }
+  .qty-btn{
+    width:28px; height:28px; border-radius:2px; border:1px solid var(--accent);
+    background:transparent; color:var(--accent); font-size:1rem; font-family:'Work Sans',sans-serif; font-weight:600;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
     transition:background 0.2s, color 0.2s;
   }
-  .buy-btn:hover{ background:var(--accent); color:var(--bg); }
+  .qty-btn:hover{ background:var(--accent); color:var(--bg); }
+  .qty-count{ font-family:'IBM Plex Mono', monospace; font-size:0.95rem; min-width:1.2em; text-align:center; }
 
   /* ---------- About ---------- */
   .about{
@@ -283,6 +267,14 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
       <a href="#buy" class="btn btn-primary" style="padding:9px 20px; font-size:0.85rem;">Buy</a>
+      <a href="cart.html" class="cart-link" aria-label="Cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H6"/>
+          <circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none"/>
+          <circle cx="17" cy="20" r="1.4" fill="currentColor" stroke="none"/>
+        </svg>
+        <span class="cart-badge" id="cart-count">0</span>
+      </a>
     </div>
   </nav>
 </header>
@@ -304,14 +296,6 @@
       <div class="hero-ctas">
         <a href="#buy" class="btn btn-primary">Buy now</a>
         <a href="#about" class="btn btn-ghost">How we source</a>
-      </div>
-    </div>
-    <div class="hero-disc-wrap">
-      <div class="hero-disc">
-        <img src="hero-tea.jpg" alt="Tea">
-        <svg class="steam s1" viewBox="0 0 20 40"><path d="M4 40 C 14 30, -4 20, 10 10 C 18 4, 8 -2, 12 -8"/></svg>
-        <svg class="steam s2" viewBox="0 0 20 40"><path d="M4 40 C 14 30, -4 20, 10 10 C 18 4, 8 -2, 12 -8"/></svg>
-        <svg class="steam s3" viewBox="0 0 20 40"><path d="M4 40 C 14 30, -4 20, 10 10 C 18 4, 8 -2, 12 -8"/></svg>
       </div>
     </div>
   </div>
@@ -427,6 +411,42 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
+const CART_KEY = "zitasCart";
+
+function getCart(){
+  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+  catch { return []; }
+}
+
+function saveCart(cart){
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  updateCartBadge();
+}
+
+function updateCartBadge(){
+  const badge = document.getElementById('cart-count');
+  if (!badge) return;
+  badge.textContent = getCart().reduce((sum, item) => sum + item.qty, 0);
+}
+
+function getQty(name){
+  const item = getCart().find(i => i.name === name);
+  return item ? item.qty : 0;
+}
+
+function setQty(product, qty){
+  const cart = getCart();
+  const idx = cart.findIndex(i => i.name === product.name);
+  if (qty <= 0){
+    if (idx > -1) cart.splice(idx, 1);
+  } else if (idx > -1){
+    cart[idx].qty = qty;
+  } else {
+    cart.push({ name: product.name, type: product.type, price: product.price, weight: product.weight, image: product.image, qty });
+  }
+  saveCart(cart);
+}
+
 const PRODUCTS = [
   {
     name: "Tea One",
@@ -437,7 +457,6 @@ const PRODUCTS = [
     price: 14, weight: "50g",
     temp: "175°F", time: "4 min", leaf: "2g / 8oz",
     caffeine: 1, steepMinutes: 4,
-    stripeLink: "REPLACE_ME_TEA_ONE"
   },
   {
     name: "Tea Two",
@@ -448,7 +467,6 @@ const PRODUCTS = [
     price: 12, weight: "50g",
     temp: "175°F", time: "2 min", leaf: "2g / 8oz",
     caffeine: 2, steepMinutes: 2,
-    stripeLink: "REPLACE_ME_TEA_TWO"
   },
   {
     name: "Tea Three",
@@ -459,7 +477,6 @@ const PRODUCTS = [
     price: 16, weight: "50g",
     temp: "195°F", time: "3 min", leaf: "3g / 8oz",
     caffeine: 2, steepMinutes: 3,
-    stripeLink: "REPLACE_ME_TEA_THREE"
   },
   {
     name: "Tea Four",
@@ -470,7 +487,6 @@ const PRODUCTS = [
     price: 13, weight: "50g",
     temp: "205°F", time: "4 min", leaf: "2.5g / 8oz",
     caffeine: 3, steepMinutes: 4,
-    stripeLink: "REPLACE_ME_TEA_FOUR"
   },
   {
     name: "Tea Five",
@@ -481,7 +497,6 @@ const PRODUCTS = [
     price: 18, weight: "50g cake",
     temp: "205°F", time: "30 sec", leaf: "5g / 8oz",
     caffeine: 2, steepMinutes: 1,
-    stripeLink: "REPLACE_ME_TEA_FIVE"
   },
   {
     name: "Tea Six",
@@ -492,7 +507,6 @@ const PRODUCTS = [
     price: 11, weight: "50g",
     temp: "212°F", time: "6 min", leaf: "2g / 8oz",
     caffeine: 0, steepMinutes: 6,
-    stripeLink: "REPLACE_ME_TEA_SIX"
   }
 ];
 
@@ -542,15 +556,36 @@ function productCard(p){
           <div class="price">£${p.price.toFixed(2)}<span class="unit">/ ${p.weight}</span></div>
           ${caffeineDots(p.caffeine)}
         </div>
-        <a class="buy-btn" href="${p.stripeLink.startsWith('REPLACE_ME') ? '#contact' : p.stripeLink}"
-           ${p.stripeLink.startsWith('REPLACE_ME') ? '' : 'target="_blank" rel="noopener"'}>
-          Buy
-        </a>
+        <div class="qty-control" data-name="${p.name}">
+          <button class="qty-btn minus" type="button">−</button>
+          <span class="qty-count">${getQty(p.name)}</span>
+          <button class="qty-btn plus" type="button">+</button>
+        </div>
       </div>
     </article>`;
 }
 
 document.getElementById('product-grid').innerHTML = PRODUCTS.map(productCard).join("");
+
+document.querySelectorAll('.qty-control').forEach(control => {
+  const name = control.dataset.name;
+  const product = PRODUCTS.find(p => p.name === name);
+  const countEl = control.querySelector('.qty-count');
+
+  control.querySelector('.plus').addEventListener('click', () => {
+    const qty = getQty(name) + 1;
+    setQty(product, qty);
+    countEl.textContent = qty;
+  });
+
+  control.querySelector('.minus').addEventListener('click', () => {
+    const qty = Math.max(0, getQty(name) - 1);
+    setQty(product, qty);
+    countEl.textContent = qty;
+  });
+});
+
+updateCartBadge();
 
 const CONTACT_EMAIL = "ethansinclair123456789@gmail.com";
 const WEB3FORMS_KEY = "f9b07fa7-40a6-4f3f-a4a2-2e41d4ac0a3d";
