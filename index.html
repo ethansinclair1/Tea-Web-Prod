@@ -369,7 +369,7 @@
       <label>Phone (optional)<input type="tel" name="phone"></label>
       <label>Message<textarea name="message" rows="4" required></textarea></label>
       <button type="submit" class="btn btn-primary">Send message</button>
-      <p class="form-note">This opens your email app with the message filled in. Nothing is sent until you press send there.</p>
+      <p class="form-note" id="contact-status"></p>
     </form>
   </div>
 </section>
@@ -536,9 +536,8 @@ function productCard(p){
           <div class="price">£${p.price.toFixed(2)}<span class="unit">/ ${p.weight}</span></div>
           ${caffeineDots(p.caffeine)}
         </div>
-        <a class="buy-btn" href="${p.stripeLink.startsWith('REPLACE_ME') ? '#' : p.stripeLink}"
-           target="_blank" rel="noopener"
-           data-name="${p.name}" data-placeholder="${p.stripeLink.startsWith('REPLACE_ME')}">
+        <a class="buy-btn" href="${p.stripeLink.startsWith('REPLACE_ME') ? '#contact' : p.stripeLink}"
+           ${p.stripeLink.startsWith('REPLACE_ME') ? '' : 'target="_blank" rel="noopener"'}>
           Buy
         </a>
       </div>
@@ -548,32 +547,41 @@ function productCard(p){
 document.getElementById('product-grid').innerHTML = PRODUCTS.map(productCard).join("");
 
 const CONTACT_EMAIL = "ethansinclair123456789@gmail.com";
+const WEB3FORMS_KEY = "REPLACE_ME_WEB3FORMS_KEY";
 
-document.getElementById('contact-form').addEventListener('submit', (e) => {
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const form = e.target;
-  const subject = encodeURIComponent(`Message from ${form.name.value}`);
-  const body = encodeURIComponent(
-    `Name: ${form.name.value}\n` +
-    `Email: ${form.email.value}\n` +
-    `Phone: ${form.phone.value || "-"}\n\n` +
-    `${form.message.value}`
-  );
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-});
+  const status = document.getElementById('contact-status');
 
-document.querySelectorAll('.buy-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    if (btn.dataset.placeholder === "true"){
-      e.preventDefault();
-      alert(
-        `"${btn.dataset.name}" isn't connected to Stripe yet.\n\n` +
-        `Create a Payment Link for this product in your Stripe Dashboard ` +
-        `(Payment Links → Create), then paste the URL into the stripeLink ` +
-        `field for this product in index.html.`
-      );
+  if (WEB3FORMS_KEY.startsWith('REPLACE_ME')){
+    const subject = encodeURIComponent(`Message from ${form.name.value}`);
+    const body = encodeURIComponent(
+      `Name: ${form.name.value}\n` +
+      `Email: ${form.email.value}\n` +
+      `Phone: ${form.phone.value || "-"}\n\n` +
+      `${form.message.value}`
+    );
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    return;
+  }
+
+  const data = new FormData(form);
+  data.append("access_key", WEB3FORMS_KEY);
+  status.textContent = "Sending...";
+
+  try {
+    const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: data });
+    const result = await res.json();
+    if (result.success){
+      form.reset();
+      status.textContent = "Message sent, we'll get back to you soon.";
+    } else {
+      status.textContent = `Couldn't send that, please email us directly at ${CONTACT_EMAIL}.`;
     }
-  });
+  } catch {
+    status.textContent = `Couldn't send that, please email us directly at ${CONTACT_EMAIL}.`;
+  }
 });
 </script>
 

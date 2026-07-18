@@ -1,4 +1,4 @@
-# Amber Hour Tea Co.
+# Zita's Teas
 
 Tea shop site. One index.html file, no backend, hosted on GitHub Pages.
 
@@ -6,15 +6,19 @@ Live at: https://ethansinclair1.github.io/Tea-Web-Prod/
 
 ## Payments
 
-Buy buttons use Stripe Payment Links. To hook one up:
+Buy buttons use Stripe Payment Links. Until a tea has a real one, its Buy button just jumps to the contact form instead. To hook one up:
 
 Make a Stripe account, go to Payment Links > New, add the tea as a product (currency GBP), copy the link it gives you (buy.stripe.com/...), paste it into the matching `stripeLink` field in the `PRODUCTS` list near the bottom of index.html.
 
 Stripe can also collect shipping address and do tax if you turn those on when making the link.
 
-## Order form
+Stripe onboarding might ask for a VAT number under "additional information" - leave it blank unless you're actually VAT registered, that's not needed to accept payments.
 
-The Order section just opens the visitor's email app addressed to ethansinclair123456789@gmail.com with their order filled in - not a real submit, they still have to hit send. Fine for now, no signup needed. Could swap to Formspree later for an actual auto-send form if it's annoying.
+## Contact form
+
+Sends to ethansinclair123456789@gmail.com through web3forms.com (free, no full signup, just get an access key by email). Until a key is set it falls back to opening the visitor's own email app instead, which doesn't work if they don't have one configured - that's what was happening before.
+
+To turn on real sending: go to web3forms.com, enter the email, get the access key emailed instantly, then paste it into `WEB3FORMS_KEY` near the bottom of index.html.
 
 ## Deploying changes
 
