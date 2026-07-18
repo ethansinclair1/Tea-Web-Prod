@@ -22,7 +22,8 @@ page for you per product.
 2. Stripe will ask for business details (this is Stripe verifying **you**,
    so they can pay you out — see the checklist in Section 5).
 3. In the dashboard, go to **Payment Links** → **+ New**.
-4. Add a product: name (e.g. "Silver Needle White Tea"), price, and currency.
+4. Add a product: name (e.g. "Silver Needle White Tea"), price, and set
+   currency to **GBP (£)** to match the prices shown on the site.
    Turn on "Adjustable quantity" if you want customers to buy more than one.
 5. Under **After payment**, you can set a thank-you message or a redirect
    back to your site.
@@ -43,6 +44,20 @@ card-entry page, so you're never handling raw card numbers yourself.
 "Collect shipping address" and "Automatic tax" (tax calculation may require
 a paid Stripe Tax add-on depending on volume — check current pricing in your
 dashboard).
+
+---
+
+## 2b. Order-by-email form
+
+There's also an "Order" section with a form (name, email, tea, quantity,
+message). On submit it opens the visitor's own email app with a pre-filled
+message addressed to `ethansinclair123456789@gmail.com` — nothing is sent
+automatically, they still have to hit send in their mail app. This works
+with zero setup and no third-party account, but it does depend on the
+visitor having an email app configured (it may not work well on some
+phones/browsers). If that becomes a problem, a service like Formspree
+(free tier) can turn this into a real auto-submitting form — say the word
+and I can wire it in.
 
 ---
 

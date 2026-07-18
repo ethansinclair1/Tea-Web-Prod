@@ -205,6 +205,27 @@
   }
   .buy-btn:hover{ background:var(--gold); color:#241812; }
 
+  /* ---------- Enquiry form ---------- */
+  .enquire{ padding:90px 0; border-top:1px solid var(--line); }
+  .enquire-form{ max-width:640px; display:flex; flex-direction:column; gap:20px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:600px){ .form-row{ grid-template-columns:1fr; } }
+  .enquire-form label{
+    display:flex; flex-direction:column; gap:8px;
+    font-size:0.8rem; letter-spacing:0.04em; color:var(--ink-dim);
+  }
+  .enquire-form input, .enquire-form select, .enquire-form textarea{
+    font-family:'Work Sans', sans-serif; font-size:0.95rem; color:var(--ink);
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:2px;
+    padding:11px 14px;
+  }
+  .enquire-form input:focus, .enquire-form select:focus, .enquire-form textarea:focus{
+    outline:none; border-color:var(--gold);
+  }
+  .enquire-form textarea{ resize:vertical; }
+  .enquire-form button{ align-self:flex-start; }
+  .form-note{ color:var(--ink-faint); font-size:0.8rem; margin:0; }
+
   /* ---------- About ---------- */
   .about{ padding:90px 0; border-top:1px solid var(--line); }
   .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; }
@@ -238,6 +259,7 @@
     <div class="nav-links">
       <ul>
         <li><a href="#shop">Shop</a></li>
+        <li><a href="#enquire">Order</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#footer">Contact</a></li>
       </ul>
@@ -295,6 +317,29 @@
   </div>
 </section>
 
+<section class="enquire" id="enquire">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow mono">Order by email</span>
+      <h2>Send us your order</h2>
+      <p>Fill this in and it opens an email to us with your order details. We'll reply to confirm price and delivery before you pay.</p>
+    </div>
+    <form class="enquire-form" id="enquire-form">
+      <div class="form-row">
+        <label>Name<input type="text" name="name" required></label>
+        <label>Email<input type="email" name="email" required></label>
+      </div>
+      <div class="form-row">
+        <label>Tea<select name="tea" id="tea-select"></select></label>
+        <label>Quantity<input type="number" name="quantity" min="1" value="1" required></label>
+      </div>
+      <label class="form-full">Message<textarea name="message" rows="4" placeholder="Delivery address, allergies, anything else"></textarea></label>
+      <button type="submit" class="btn btn-primary">Send order request</button>
+      <p class="form-note">This opens your email app with the order filled in. Nothing is sent until you press send there.</p>
+    </form>
+  </div>
+</section>
+
 <section class="about" id="about">
   <div class="wrap about-grid">
     <div>
@@ -341,13 +386,6 @@
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// ----------------------------------------------------------------
-// PRODUCTS
-// Replace each "stripeLink" below with the real Payment Link URL
-// you create in your Stripe Dashboard for that product.
-// Until you do, the Buy button will explain what to do instead
-// of taking the customer anywhere.
-// ----------------------------------------------------------------
 const PRODUCTS = [
   {
     name: "Silver Needle White Tea",
@@ -474,7 +512,7 @@ function productCard(p){
       </div>
       <div class="card-foot">
         <div>
-          <div class="price">$${p.price.toFixed(2)}<span class="unit">/ ${p.weight}</span></div>
+          <div class="price">£${p.price.toFixed(2)}<span class="unit">/ ${p.weight}</span></div>
           ${caffeineDots(p.caffeine)}
         </div>
         <a class="buy-btn" href="${p.stripeLink.startsWith('REPLACE_ME') ? '#' : p.stripeLink}"
@@ -487,6 +525,26 @@ function productCard(p){
 }
 
 document.getElementById('product-grid').innerHTML = PRODUCTS.map(productCard).join("");
+
+const ORDER_EMAIL = "ethansinclair123456789@gmail.com";
+
+const teaSelect = document.getElementById('tea-select');
+teaSelect.innerHTML = PRODUCTS.map(p => `<option value="${p.name}">${p.name}</option>`).join("")
+  + `<option value="General enquiry">General enquiry</option>`;
+
+document.getElementById('enquire-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const subject = encodeURIComponent(`Tea order: ${form.tea.value} x${form.quantity.value}`);
+  const body = encodeURIComponent(
+    `Name: ${form.name.value}\n` +
+    `Email: ${form.email.value}\n` +
+    `Tea: ${form.tea.value}\n` +
+    `Quantity: ${form.quantity.value}\n\n` +
+    `${form.message.value}`
+  );
+  window.location.href = `mailto:${ORDER_EMAIL}?subject=${subject}&body=${body}`;
+});
 
 document.querySelectorAll('.buy-btn').forEach(btn => {
   btn.addEventListener('click', (e) => {
