@@ -22,15 +22,15 @@ Sends to ethansinclair123456789@gmail.com through web3forms.com. Access key is a
 
 Drop these straight into the Tea Web folder, next to index.html, exact filenames below. They'll show up automatically next push - until then they show as a broken image icon.
 
-- `hero-tea.jpeg` - the big circle photo at the top of the page
-- `creator.jpeg` - Zita's photo in the Meet Zita section
-- `tea-bg.jpeg` - background photo behind the About section
-- `prod1.jpeg` - Tea One (white tea)
-- `prod2.jpeg` - Tea Two (green tea)
-- `prod3.jpeg` - Tea Three (oolong tea)
-- `prod4.jpeg` - Tea Four (black tea)
-- `prod5.jpeg` - Tea Five (pu-erh tea)
-- `prod6.jpeg` - Tea Six (herbal blend)
+- `hero-tea.jpg` - the big circle photo at the top of the page
+- `creator.jpg` - Zita's photo in the Meet Zita section
+- `tea-bg.jpg` - background photo behind the About section
+- `prod1.jpg` - Tea One (white tea)
+- `prod2.jpg` - Tea Two (green tea)
+- `prod3.jpg` - Tea Three (oolong tea)
+- `prod4.jpg` - Tea Four (black tea)
+- `prod5.jpg` - Tea Five (pu-erh tea)
+- `prod6.jpg` - Tea Six (herbal blend)
 
 ## Deploying changes
 
