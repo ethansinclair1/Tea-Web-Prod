@@ -73,9 +73,14 @@
   .nav-links{ display:flex; align-items:center; gap:32px; }
   @media (max-width:720px){ .nav-links ul{ display:none; } }
 
+  /* ---------- Leaf decorations ---------- */
+  .leaf-deco{ position:absolute; z-index:0; opacity:0.16; pointer-events:none; }
+  .leaf-deco path{ fill:var(--accent); }
+  .leaf-deco .vein{ fill:none; stroke:var(--bg); stroke-width:1.5; opacity:0.6; }
+
   /* ---------- Hero ---------- */
   .hero{ position:relative; padding:96px 0 80px; overflow:hidden; }
-  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center; }
+  .hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center; }
   @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
   .eyebrow{
     font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.16em;
@@ -215,8 +220,8 @@
   .about p{ color:var(--ink-dim); line-height:1.7; margin-top:18px; }
 
   /* ---------- Creator ---------- */
-  .creator{ padding:90px 0; border-top:1px solid var(--line); }
-  .creator-grid{ display:flex; gap:40px; align-items:center; flex-wrap:wrap; }
+  .creator{ padding:90px 0; border-top:1px solid var(--line); position:relative; overflow:hidden; }
+  .creator-grid{ position:relative; z-index:1; display:flex; gap:40px; align-items:center; flex-wrap:wrap; }
   .creator-avatar{
     width:120px; height:120px; border-radius:50%; flex:none;
     object-fit:cover; background:var(--bg-panel-2);
@@ -283,6 +288,14 @@
 </header>
 
 <section class="hero" id="top">
+  <svg class="leaf-deco" style="width:180px; top:-40px; left:-50px; transform:rotate(-25deg);" viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30 2 C55 25 55 75 30 98 C5 75 5 25 30 2 Z"/>
+    <path class="vein" d="M30 8 L30 92"/>
+  </svg>
+  <svg class="leaf-deco" style="width:130px; bottom:-30px; right:-30px; transform:rotate(160deg);" viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30 2 C55 25 55 75 30 98 C5 75 5 25 30 2 Z"/>
+    <path class="vein" d="M30 8 L30 92"/>
+  </svg>
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Small-batch · loose leaf · steeped to order</span>
@@ -346,6 +359,10 @@
 </section>
 
 <section class="creator" id="creator">
+  <svg class="leaf-deco" style="width:150px; top:-20px; right:-40px; transform:rotate(45deg);" viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30 2 C55 25 55 75 30 98 C5 75 5 25 30 2 Z"/>
+    <path class="vein" d="M30 8 L30 92"/>
+  </svg>
   <div class="wrap creator-grid">
     <img src="creator.jpg" alt="Zita" class="creator-avatar">
     <div>
