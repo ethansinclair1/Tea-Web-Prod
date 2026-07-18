@@ -16,9 +16,7 @@ Stripe onboarding might ask for a VAT number under "additional information" - le
 
 ## Contact form
 
-Sends to ethansinclair123456789@gmail.com through web3forms.com (free, no full signup, just get an access key by email). Until a key is set it falls back to opening the visitor's own email app instead, which doesn't work if they don't have one configured - that's what was happening before.
-
-To turn on real sending: go to web3forms.com, enter the email, get the access key emailed instantly, then paste it into `WEB3FORMS_KEY` near the bottom of index.html.
+Sends to ethansinclair123456789@gmail.com through web3forms.com. Access key is already set in `WEB3FORMS_KEY` near the bottom of index.html, so this is live - submissions land straight in the inbox.
 
 ## Deploying changes
 
