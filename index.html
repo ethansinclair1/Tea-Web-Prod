@@ -88,8 +88,8 @@
   .leaf-deco .vein{ fill:none; stroke:var(--bg); stroke-width:1.5; opacity:0.6; }
 
   /* ---------- Hero ---------- */
-  .hero{ position:relative; padding:96px 0 80px; overflow:hidden; }
-  .hero-grid{ position:relative; z-index:1; max-width:640px; }
+  .hero{ position:relative; padding:96px 0 80px; overflow:hidden; text-align:center; }
+  .hero-grid{ position:relative; z-index:1; max-width:640px; margin:0 auto; display:flex; flex-direction:column; align-items:center; }
   .eyebrow{
     font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.16em;
     text-transform:uppercase; color:var(--accent); margin-bottom:18px; display:block;
@@ -103,7 +103,7 @@
   .hero p.lede{
     margin-top:24px; color:var(--ink-dim); font-size:1.08rem; line-height:1.65; max-width:46ch;
   }
-  .hero-ctas{ margin-top:34px; display:flex; gap:14px; flex-wrap:wrap; }
+  .hero-ctas{ margin-top:34px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
   .btn{
     font-family:'Work Sans', sans-serif; font-weight:600; font-size:0.92rem;
     padding:13px 26px; border-radius:2px; border:1px solid transparent;
@@ -292,7 +292,7 @@
     <div>
       <span class="eyebrow">Small-batch · loose leaf · steeped to order</span>
       <h1>Good things, <em>steeped slowly.</em></h1>
-      <p class="lede">Small batches, steeped one cup at a time.</p>
+      <p class="lede">We've spent years perfecting small batches, steeped one cup at a time.</p>
       <div class="hero-ctas">
         <a href="#buy" class="btn btn-primary">Buy now</a>
         <a href="#about" class="btn btn-ghost">How we source</a>
@@ -352,7 +352,7 @@
     <div>
       <span class="eyebrow mono">Who's behind this</span>
       <h2>Meet Zita</h2>
-      <p>Enter description</p>
+      <p>Zita has been making tea for years, working in small batches and tasting every one herself before it goes up for sale.</p>
     </div>
   </div>
 </section>
