@@ -18,7 +18,7 @@ Stripe onboarding might ask for a VAT number under "additional information" - le
 
 ## Contact form
 
-Sends to ethansinclair123456789@gmail.com through web3forms.com. Access key is already set in `WEB3FORMS_KEY` near the bottom of index.html, so this is live - submissions land straight in the inbox.
+Actually delivers to whatever inbox the `WEB3FORMS_KEY` access key is registered to - right now that's still ethansinclair123456789@gmail.com, since that key was created for that address. The `CONTACT_EMAIL` constant in index.html/cart.html is now sinclairzita@hotmail.com, but changing that constant alone doesn't move where submissions land - it only affects the mailto fallback and error message text. To actually redirect form deliveries to sinclairzita@hotmail.com, get a new access key from web3forms.com for that address and swap `WEB3FORMS_KEY` in both index.html and cart.html.
 
 ## Images to add
 
