@@ -81,7 +81,7 @@
   <div class="wrap">
     <div class="ritual-item">
       <span class="num mono">01</span>
-      <div><h3>Pick a leaf</h3><p>Each card shows a photo of the tea and the exact steep time as a ring around it.</p></div>
+      <div><h3>Pick a leaf</h3><p>Each tea shows the water temperature and steep time right on the photo.</p></div>
     </div>
     <div class="ritual-item">
       <span class="num mono">02</span>
@@ -99,7 +99,7 @@
     <div class="section-head">
       <span class="eyebrow mono">Buy</span>
       <h2>Our teas</h2>
-      <p>Every card lists the leaf amount, water temperature, and steep time — start there, then adjust to taste. The ring around each disc fills to show steep time on a 0–6 minute scale.</p>
+      <p>Every tea shows its water temperature and steep time on the photo, and the leaf amount underneath — start there, then adjust to taste.</p>
     </div>
     <div class="filters" id="filters" role="group" aria-label="Filter teas">
       <button type="button" class="chip active" data-filter="all">All teas</button>
@@ -129,7 +129,7 @@
       </li>
       <li>
         <span class="num mono">03</span>
-        <div><h3>Steep</h3><p>Time it to the steep time listed — the ring on each card's photo shows this at a glance.</p></div>
+        <div><h3>Steep</h3><p>Time it to the steep time listed on the tea's photo.</p></div>
       </li>
       <li>
         <span class="num mono">04</span>
@@ -348,82 +348,73 @@ const PRODUCTS = [
   }
 ];
 
-function discRingSVG(steepMinutes){
-  const max = 6;
-  const r = 38, c = 2 * Math.PI * r;
-  const filled = Math.min(steepMinutes / max, 1) * c;
-  return `
-    <svg class="disc-ring" viewBox="0 0 90 90">
-      <circle cx="45" cy="45" r="${r}"></circle>
-      <circle class="progress" cx="45" cy="45" r="${r}"
-        stroke-dasharray="${filled} ${c}"
-        transform="rotate(-90 45 45)"></circle>
-    </svg>`;
-}
-
 function caffeineDots(level){
   let dots = "";
   for (let i = 0; i < 3; i++){
     dots += `<span class="dot ${i < level ? 'on' : ''}"></span>`;
   }
-  return `<div class="caff">${dots}</div>`;
+  return `<div class="caff" title="Caffeine: ${level} of 3">${dots}</div>`;
+}
+
+// bottom of the card: "Add to basket" button until it's in the cart, then a +/- stepper
+function buyControl(p){
+  const qty = getQty(p.name);
+  if (qty === 0){
+    return `<button class="btn btn-primary add-btn" type="button" data-name="${p.name}">Add to basket</button>`;
+  }
+  return `
+    <div class="qty-control" data-name="${p.name}">
+      <button class="qty-btn minus" type="button" aria-label="Remove one ${p.name}">−</button>
+      <span class="qty-count" aria-live="polite">${qty} in basket</span>
+      <button class="qty-btn plus" type="button" aria-label="Add one ${p.name}">+</button>
+    </div>`;
 }
 
 function productCard(p){
   return `
-    <article class="card" data-group="${p.group}" data-caff="${p.caffeine}">
-      <div class="card-top">
-        <div class="disc-wrap">
-          <div class="disc"><img src="${p.image}" alt="${p.type}" loading="lazy"></div>
-          ${discRingSVG(p.steepMinutes)}
-        </div>
+    <article class="card" data-group="${p.group}" data-name="${p.name}">
+      <div class="card-img">
+        <img src="${p.image}" alt="${p.name}, ${p.type}" loading="lazy">
+        <span class="card-tag">${p.type}</span>
+        <span class="card-steep mono">${p.temp} · ${p.time}</span>
+      </div>
+      <div class="card-body">
         <div class="card-title">
-          <span class="type">${p.type}</span>
           <h3>${p.name}</h3>
-          <div class="tagline">${p.tagline}</div>
+          <div class="price">${money(p.price)}<span class="unit">/ ${p.weight}</span></div>
         </div>
-      </div>
-      <p class="desc">${p.desc}</p>
-      <div class="steep-data">
-        <div><span class="label">Water</span><span class="val">${p.temp}</span></div>
-        <div><span class="label">Steep</span><span class="val">${p.time}</span></div>
-        <div><span class="label">Leaf</span><span class="val">${p.leaf}</span></div>
-      </div>
-      <div class="card-foot">
-        <div>
-          <div class="price">£${p.price.toFixed(2)}<span class="unit">/ ${p.weight}</span></div>
+        <div class="tagline">${p.tagline}</div>
+        <p class="desc">${p.desc}</p>
+        <div class="card-meta">
+          <span>Leaf <b class="mono">${p.leaf}</b></span>
           ${caffeineDots(p.caffeine)}
         </div>
-        <div class="qty-control" data-name="${p.name}">
-          <button class="qty-btn minus" type="button" aria-label="Remove one ${p.name}">−</button>
-          <span class="qty-count" aria-live="polite">${getQty(p.name)}</span>
-          <button class="qty-btn plus" type="button" aria-label="Add one ${p.name}">+</button>
-        </div>
+        <div class="buy">${buyControl(p)}</div>
       </div>
     </article>`;
 }
 
-document.getElementById('product-grid').innerHTML = PRODUCTS.map(productCard).join("");
+const grid = document.getElementById('product-grid');
+grid.innerHTML = PRODUCTS.map(productCard).join("");
 
-document.querySelectorAll('.qty-control').forEach(control => {
-  const name = control.dataset.name;
-  const product = PRODUCTS.find(p => p.name === name);
-  const countEl = control.querySelector('.qty-count');
+// one listener on the grid instead of one per button, since the buttons get re-rendered
+grid.addEventListener('click', (e) => {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  const product = PRODUCTS.find(p => p.name === card.dataset.name);
+  let qty = getQty(product.name);
 
-  control.querySelector('.plus').addEventListener('click', () => {
-    const qty = getQty(name) + 1;
-    setQty(product, qty);
-    countEl.textContent = qty;
-    showToast(`${name} added to cart`);
-  });
-
-  control.querySelector('.minus').addEventListener('click', () => {
-    const qty = Math.max(0, getQty(name) - 1);
-    setQty(product, qty);
-    countEl.textContent = qty;
-  });
+  if (e.target.closest('.add-btn') || e.target.closest('.plus')){
+    qty++;
+    showToast(`${product.name} added to basket`);
+  } else if (e.target.closest('.minus')){
+    qty--;
+  } else {
+    return;
+  }
+  setQty(product, qty);
+  card.querySelector('.buy').innerHTML = buyControl(product);
 });
-
 
 // ---- filters ----
 document.querySelectorAll('#filters .chip').forEach(chip => {

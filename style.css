@@ -202,65 +202,63 @@ nav ul a:hover{ color:var(--accent); }
 .chip.active{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
 
 .grid{
-  display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:0;
-  padding:1px 0 0 1px; /* cards overlap their borders by 1px so lines stay thin */
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:32px 24px;
 }
-.card{
-  border:1px solid var(--line); margin:-1px 0 0 -1px;
-  background:var(--bg); padding:32px 28px 28px; display:flex; flex-direction:column; gap:16px;
-  transition:background 0.25s;
-}
-.card:hover{ background:var(--bg-panel); }
+.card{ display:flex; flex-direction:column; }
 .card[hidden]{ display:none; }
 
-.card-top{ display:flex; gap:20px; align-items:flex-start; }
-
-/* tea photo */
-.disc-wrap{ position:relative; flex:none; width:76px; height:76px; }
-.disc{
-  width:76px; height:76px; border-radius:50%; overflow:hidden;
-  background:var(--bg-panel-2);
-  box-shadow:0 0 0 1px var(--line);
-  position:relative;
+/* big photo on top like most tea shops */
+.card-img{
+  position:relative; aspect-ratio:4/5; overflow:hidden;
+  background:var(--bg-panel-2); border-radius:4px;
 }
-.disc img{ width:100%; height:100%; object-fit:cover; display:block; }
-.disc-ring{ position:absolute; inset:-7px; }
-.disc-ring circle{ fill:none; stroke:var(--line); stroke-width:2; }
-.disc-ring circle.progress{ stroke:var(--accent); stroke-linecap:round; transition:stroke-dasharray 0.4s; }
-
-.card-title{ flex:1; }
-.card-title .type{ display:block; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:5px; }
-.card-title h3{ font-size:1.28rem; line-height:1.2; }
-.card-title .tagline{ font-style:italic; color:var(--accent); font-size:0.88rem; margin-top:4px; }
-
-.desc{ color:var(--ink-dim); font-size:0.92rem; line-height:1.6; margin:0; }
-
-.steep-data{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
-  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-  padding:14px 0;
+.card-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease; }
+.card:hover .card-img img{ transform:scale(1.04); }
+.card-tag{
+  position:absolute; top:12px; left:12px;
+  background:var(--bg); color:var(--ink);
+  font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600;
+  padding:5px 10px; border-radius:999px;
 }
-.steep-data div{ text-align:left; }
-.steep-data .label{ display:block; font-size:0.66rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px; }
-.steep-data .val{ font-family:'IBM Plex Mono', monospace; font-size:0.86rem; color:var(--ink); }
+.card-steep{
+  position:absolute; bottom:12px; left:12px;
+  background:rgba(43,54,38,0.82); color:var(--bg);
+  font-size:0.75rem; padding:5px 10px; border-radius:999px;
+}
 
-.card-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; }
-.price{ font-family:'IBM Plex Mono', monospace; font-size:1.05rem; color:var(--accent); }
+.card-body{ padding:16px 2px 0; display:flex; flex-direction:column; gap:6px; flex:1; }
+.card-title{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+.card-title h3{ font-size:1.25rem; line-height:1.2; }
+.tagline{ font-style:italic; color:var(--accent); font-size:0.9rem; }
+.desc{ color:var(--ink-dim); font-size:0.9rem; line-height:1.55; margin:4px 0 0; }
+
+.card-meta{
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:0.8rem; color:var(--ink-faint); margin-top:6px;
+}
+.card-meta b{ color:var(--ink); font-weight:500; }
+
+.price{ font-family:'IBM Plex Mono', monospace; font-size:1rem; color:var(--ink); white-space:nowrap; }
 .price .unit{ color:var(--ink-faint); font-size:0.72rem; margin-left:4px; }
 
 .caff{ display:flex; gap:4px; align-items:center; }
-.caff .dot{ width:5px; height:5px; border-radius:50%; background:var(--line); }
+.caff .dot{ width:6px; height:6px; border-radius:50%; background:var(--line); }
 .caff .dot.on{ background:var(--accent); }
 
-.qty-control{ display:flex; align-items:center; gap:10px; }
+.buy{ margin-top:auto; padding-top:14px; }
+.add-btn{ width:100%; justify-content:center; border-radius:999px; }
+.qty-control{
+  display:flex; align-items:center; justify-content:space-between;
+  border:1px solid var(--accent); border-radius:999px; padding:5px;
+}
 .qty-btn{
-  width:28px; height:28px; border-radius:2px; border:1px solid var(--accent);
-  background:transparent; color:var(--accent); font-size:1rem; font-family:'Work Sans',sans-serif; font-weight:600;
+  width:34px; height:34px; border-radius:50%; border:none;
+  background:var(--accent-soft); color:var(--accent); font-size:1.1rem; font-family:'Work Sans',sans-serif; font-weight:600;
   cursor:pointer; display:flex; align-items:center; justify-content:center;
   transition:background 0.2s, color 0.2s;
 }
 .qty-btn:hover{ background:var(--accent); color:var(--bg); }
-.qty-count{ font-family:'IBM Plex Mono', monospace; font-size:0.95rem; min-width:1.2em; text-align:center; }
+.qty-count{ font-size:0.9rem; font-weight:500; color:var(--ink); }
 
 /* toast popup */
 .toast{
@@ -387,15 +385,7 @@ footer ul a:hover{ color:var(--accent); }
 .cart-item-info h3{ font-size:1.05rem; margin-top:2px; }
 .cart-item-price{ color:var(--ink-dim); font-family:'IBM Plex Mono', monospace; font-size:0.85rem; margin-top:4px; }
 
-.qty-control{ display:flex; align-items:center; gap:10px; flex:none; }
-.qty-btn{
-  width:28px; height:28px; border-radius:2px; border:1px solid var(--accent);
-  background:transparent; color:var(--accent); font-size:1rem; font-family:'Work Sans',sans-serif; font-weight:600;
-  cursor:pointer; display:flex; align-items:center; justify-content:center;
-  transition:background 0.2s, color 0.2s;
-}
-.qty-btn:hover{ background:var(--accent); color:var(--bg); }
-.qty-count{ font-family:'IBM Plex Mono', monospace; font-size:0.95rem; min-width:1.2em; text-align:center; }
+.cart-item .qty-control{ flex:none; gap:12px; }
 
 .line-total{ font-family:'IBM Plex Mono', monospace; font-weight:600; min-width:64px; text-align:right; flex:none; }
 .remove-btn{
