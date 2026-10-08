@@ -9,257 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:            #F7F2E7;
-    --bg-panel:      #EFE7D3;
-    --bg-panel-2:    #E4D8BC;
-    --line:          rgba(43,54,38,0.14);
-    --ink:           #2B3626;
-    --ink-dim:       #5C6B54;
-    --ink-faint:     #8B9481;
-    --accent:        #6FA35D;
-    --accent-soft:   rgba(111,163,93,0.14);
-  }
-
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Work Sans', sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  body::before{
-    content:"";
-    position:fixed; inset:0;
-    pointer-events:none;
-    background-image:
-      radial-gradient(circle at 20% 10%, rgba(91,122,79,0.08), transparent 40%),
-      radial-gradient(circle at 85% 60%, rgba(91,122,79,0.06), transparent 45%);
-    z-index:0;
-  }
-  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
-  a{ color:inherit; }
-  .mono{ font-family:'IBM Plex Mono', monospace; }
-  .wrap{ max-width:1140px; margin:0 auto; padding:0 28px; }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
-  }
-
-  /* ---------- Nav ---------- */
-  header{
-    position:sticky; top:0; z-index:20;
-    background:rgba(247,242,231,0.88);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  nav.wrap{
-    display:flex; align-items:center; justify-content:space-between;
-    height:76px;
-  }
-  .logo{ display:flex; align-items:center; gap:10px; font-size:1.05rem; }
-  .logo-mark{
-    width:26px; height:26px; border-radius:50%;
-    background:conic-gradient(from 210deg, #F3ECD9, #7FA36C, #2F3D26, #F3ECD9);
-    box-shadow:0 0 0 1px var(--line);
-  }
-  .logo b{ font-family:'Fraunces', serif; font-weight:600; font-size:1.1rem; letter-spacing:0.01em; }
-  .logo span{ color:var(--ink-faint); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; display:block; margin-top:1px; }
-  nav ul{ list-style:none; display:flex; gap:32px; margin:0; padding:0; font-size:0.92rem; }
-  nav ul a{ text-decoration:none; color:var(--ink-dim); transition:color 0.2s; }
-  nav ul a:hover{ color:var(--accent); }
-  .nav-links{ display:flex; align-items:center; gap:24px; }
-  @media (max-width:720px){ .nav-links ul{ display:none; } }
-  .cart-link{ position:relative; display:inline-flex; align-items:center; color:var(--ink); text-decoration:none; }
-  .cart-link:hover{ color:var(--accent); }
-  .cart-badge{
-    position:absolute; top:-8px; right:-10px;
-    background:var(--accent); color:var(--bg);
-    font-family:'IBM Plex Mono', monospace; font-size:0.62rem; font-weight:600;
-    min-width:16px; height:16px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; padding:0 3px;
-  }
-
-  /* ---------- Leaf decorations ---------- */
-  .leaf-deco{ position:absolute; z-index:0; opacity:0.16; pointer-events:none; }
-  .leaf-deco path{ fill:var(--accent); }
-  .leaf-deco .vein{ fill:none; stroke:var(--bg); stroke-width:1.5; opacity:0.6; }
-
-  /* ---------- Hero ---------- */
-  .hero{ position:relative; padding:96px 0 80px; overflow:hidden; text-align:center; }
-  .hero-grid{ position:relative; z-index:1; max-width:640px; margin:0 auto; display:flex; flex-direction:column; align-items:center; }
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.16em;
-    text-transform:uppercase; color:var(--accent); margin-bottom:18px; display:block;
-  }
-  .hero h1{
-    font-size:clamp(2.4rem, 4.6vw, 4rem);
-    line-height:1.04;
-    max-width:11ch;
-  }
-  .hero h1 em{ font-style:italic; color:var(--accent); }
-  .hero p.lede{
-    margin-top:24px; color:var(--ink-dim); font-size:1.08rem; line-height:1.65; max-width:46ch;
-  }
-  .hero-ctas{ margin-top:34px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
-  .btn{
-    font-family:'Work Sans', sans-serif; font-weight:600; font-size:0.92rem;
-    padding:13px 26px; border-radius:2px; border:1px solid transparent;
-    cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
-    transition:transform 0.15s ease, background 0.2s, border-color 0.2s;
-  }
-  .btn:hover{ transform:translateY(-1px); }
-  .btn-primary{ background:var(--accent); color:var(--bg); }
-  .btn-primary:hover{ background:#5A8A4A; }
-  .btn-ghost{ border-color:var(--line); color:var(--ink); }
-  .btn-ghost:hover{ border-color:var(--accent); color:var(--accent); }
-
-  /* ---------- Ritual strip ---------- */
-  .ritual{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-panel); }
-  .ritual .wrap{
-    padding:34px 28px; display:flex; gap:48px; flex-wrap:wrap; justify-content:space-between;
-  }
-  .ritual-item{ display:flex; gap:14px; max-width:280px; }
-  .ritual-item .num{ font-family:'IBM Plex Mono', monospace; color:var(--accent); font-size:0.85rem; padding-top:2px; }
-  .ritual-item h3{ font-size:0.98rem; font-weight:600; font-family:'Work Sans', sans-serif; margin-bottom:4px; }
-  .ritual-item p{ margin:0; color:var(--ink-faint); font-size:0.86rem; line-height:1.5; }
-
-  /* ---------- Catalog ---------- */
-  .catalog{ padding:96px 0 40px; }
-  .section-head{ margin-bottom:48px; max-width:60ch; }
-  .section-head .eyebrow{ margin-bottom:14px; }
-  .section-head h2{ font-size:clamp(1.8rem,3vw,2.4rem); }
-  .section-head p{ color:var(--ink-dim); margin-top:14px; line-height:1.6; }
-
-  .grid{
-    display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:1px;
-    background:var(--line); border:1px solid var(--line);
-  }
-  .card{
-    background:var(--bg); padding:32px 28px 28px; display:flex; flex-direction:column; gap:16px;
-    transition:background 0.25s;
-  }
-  .card:hover{ background:var(--bg-panel); }
-
-  .card-top{ display:flex; gap:20px; align-items:flex-start; }
-
-  /* tea photo */
-  .disc-wrap{ position:relative; flex:none; width:76px; height:76px; }
-  .disc{
-    width:76px; height:76px; border-radius:50%; overflow:hidden;
-    background:var(--bg-panel-2);
-    box-shadow:0 0 0 1px var(--line);
-    position:relative;
-  }
-  .disc img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .disc-ring{ position:absolute; inset:-7px; }
-  .disc-ring circle{ fill:none; stroke:var(--line); stroke-width:2; }
-  .disc-ring circle.progress{ stroke:var(--accent); stroke-linecap:round; transition:stroke-dasharray 0.4s; }
-
-  .card-title{ flex:1; }
-  .card-title .type{ display:block; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:5px; }
-  .card-title h3{ font-size:1.28rem; line-height:1.2; }
-  .card-title .tagline{ font-style:italic; color:var(--accent); font-size:0.88rem; margin-top:4px; }
-
-  .desc{ color:var(--ink-dim); font-size:0.92rem; line-height:1.6; margin:0; }
-
-  .steep-data{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    padding:14px 0;
-  }
-  .steep-data div{ text-align:left; }
-  .steep-data .label{ display:block; font-size:0.66rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:3px; }
-  .steep-data .val{ font-family:'IBM Plex Mono', monospace; font-size:0.86rem; color:var(--ink); }
-
-  .card-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:auto; }
-  .price{ font-family:'IBM Plex Mono', monospace; font-size:1.05rem; color:var(--accent); }
-  .price .unit{ color:var(--ink-faint); font-size:0.72rem; margin-left:4px; }
-
-  .caff{ display:flex; gap:4px; align-items:center; }
-  .caff .dot{ width:5px; height:5px; border-radius:50%; background:var(--line); }
-  .caff .dot.on{ background:var(--accent); }
-
-  .qty-control{ display:flex; align-items:center; gap:10px; }
-  .qty-btn{
-    width:28px; height:28px; border-radius:2px; border:1px solid var(--accent);
-    background:transparent; color:var(--accent); font-size:1rem; font-family:'Work Sans',sans-serif; font-weight:600;
-    cursor:pointer; display:flex; align-items:center; justify-content:center;
-    transition:background 0.2s, color 0.2s;
-  }
-  .qty-btn:hover{ background:var(--accent); color:var(--bg); }
-  .qty-count{ font-family:'IBM Plex Mono', monospace; font-size:0.95rem; min-width:1.2em; text-align:center; }
-
-  /* ---------- Instructions ---------- */
-  .instructions{ padding:90px 0; border-top:1px solid var(--line); background:var(--bg-panel); }
-  .steps{
-    list-style:none; margin:0; padding:0;
-    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:32px;
-  }
-  .steps li{ display:flex; gap:14px; }
-  .steps .num{ font-family:'IBM Plex Mono', monospace; color:var(--accent); font-size:0.85rem; padding-top:2px; }
-  .steps h3{ font-size:1rem; font-weight:600; font-family:'Work Sans', sans-serif; margin-bottom:4px; }
-  .steps p{ margin:0; color:var(--ink-dim); font-size:0.9rem; line-height:1.55; }
-
-  /* ---------- About ---------- */
-  .about{
-    padding:110px 0; border-top:1px solid var(--line);
-    background-image: linear-gradient(rgba(247,242,231,0.90), rgba(247,242,231,0.90)), url('tea-bg.jpg');
-    background-size:cover; background-position:center;
-  }
-  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; }
-  @media (max-width:800px){ .about-grid{ grid-template-columns:1fr; gap:36px; } }
-  .about h2{ font-size:clamp(1.8rem,3vw,2.3rem); max-width:14ch; }
-  .about p{ color:var(--ink-dim); line-height:1.7; margin-top:18px; }
-
-  /* ---------- Creator ---------- */
-  .creator{ padding:90px 0; border-top:1px solid var(--line); position:relative; overflow:hidden; }
-  .creator-grid{ position:relative; z-index:1; display:flex; gap:40px; align-items:center; flex-wrap:wrap; }
-  .creator-avatar{
-    width:120px; height:120px; border-radius:50%; flex:none;
-    object-fit:cover; background:var(--bg-panel-2);
-    box-shadow:0 0 0 1px var(--line);
-  }
-  .creator-grid h2{ font-size:clamp(1.6rem,2.6vw,2rem); margin-top:8px; }
-  .creator-grid p{ color:var(--ink-dim); line-height:1.7; margin-top:14px; max-width:56ch; }
-
-  /* ---------- Contact form ---------- */
-  .contact{ padding:90px 0; border-top:1px solid var(--line); }
-  .contact-form{ max-width:640px; display:flex; flex-direction:column; gap:20px; }
-  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-  @media (max-width:600px){ .form-row{ grid-template-columns:1fr; } }
-  .contact-form label{
-    display:flex; flex-direction:column; gap:8px;
-    font-size:0.8rem; letter-spacing:0.04em; color:var(--ink-dim);
-  }
-  .contact-form input, .contact-form textarea{
-    font-family:'Work Sans', sans-serif; font-size:0.95rem; color:var(--ink);
-    background:var(--bg-panel); border:1px solid var(--line); border-radius:2px;
-    padding:11px 14px;
-  }
-  .contact-form input:focus, .contact-form textarea:focus{
-    outline:none; border-color:var(--accent);
-  }
-  .contact-form textarea{ resize:vertical; }
-  .contact-form button{ align-self:flex-start; }
-  .form-note{ color:var(--ink-faint); font-size:0.85rem; margin:0; min-height:1.2em; }
-  .form-note.success{ color:var(--accent); font-weight:600; }
-  .form-note.error{ color:#D97A6C; font-weight:600; }
-
-  /* ---------- Footer ---------- */
-  footer{ border-top:1px solid var(--line); background:var(--bg-panel); padding:56px 0 32px; }
-  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; }
-  @media (max-width:720px){ .footer-grid{ grid-template-columns:1fr; gap:30px; } }
-  footer h4{ font-family:'Work Sans',sans-serif; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:14px; }
-  footer p{ color:var(--ink-dim); font-size:0.9rem; line-height:1.6; margin:0; }
-  footer ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
-  footer ul a{ text-decoration:none; color:var(--ink-dim); font-size:0.9rem; }
-  footer ul a:hover{ color:var(--accent); }
-  .fine{ margin-top:44px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color:var(--ink-faint); font-size:0.78rem; }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -450,27 +200,8 @@
   </div>
 </footer>
 
+<script src="cart.js"></script>
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
-
-const CART_KEY = "zitasCart";
-
-function getCart(){
-  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
-  catch { return []; }
-}
-
-function saveCart(cart){
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  updateCartBadge();
-}
-
-function updateCartBadge(){
-  const badge = document.getElementById('cart-count');
-  if (!badge) return;
-  badge.textContent = getCart().reduce((sum, item) => sum + item.qty, 0);
-}
-
 function getQty(name){
   const item = getCart().find(i => i.name === name);
   return item ? item.qty : 0;
@@ -627,10 +358,6 @@ document.querySelectorAll('.qty-control').forEach(control => {
   });
 });
 
-updateCartBadge();
-
-const CONTACT_EMAIL = "sinclairzita@hotmail.com";
-const WEB3FORMS_KEY = "f9b07fa7-40a6-4f3f-a4a2-2e41d4ac0a3d";
 
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -649,23 +376,14 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
     return;
   }
 
-  const data = new FormData(form);
-  data.append("access_key", WEB3FORMS_KEY);
   status.className = "form-note";
   status.textContent = "Sending...";
 
-  try {
-    const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: data });
-    const result = await res.json();
-    if (result.success){
-      form.reset();
-      status.className = "form-note success";
-      status.textContent = "Message sent — we'll get back to you soon.";
-    } else {
-      status.className = "form-note error";
-      status.textContent = `Couldn't send that, please email us directly at ${CONTACT_EMAIL}.`;
-    }
-  } catch {
+  if (await sendForm(new FormData(form))){
+    form.reset();
+    status.className = "form-note success";
+    status.textContent = "Message sent — we'll get back to you soon.";
+  } else {
     status.className = "form-note error";
     status.textContent = `Couldn't send that, please email us directly at ${CONTACT_EMAIL}.`;
   }

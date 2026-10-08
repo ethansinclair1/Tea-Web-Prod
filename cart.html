@@ -8,149 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:            #F7F2E7;
-    --bg-panel:      #EFE7D3;
-    --bg-panel-2:    #E4D8BC;
-    --line:          rgba(43,54,38,0.14);
-    --ink:           #2B3626;
-    --ink-dim:       #5C6B54;
-    --ink-faint:     #8B9481;
-    --accent:        #6FA35D;
-    --accent-soft:   rgba(111,163,93,0.14);
-  }
-
-  *{ box-sizing:border-box; }
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Work Sans', sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
-  a{ color:inherit; }
-  .mono{ font-family:'IBM Plex Mono', monospace; }
-  .wrap{ max-width:1140px; margin:0 auto; padding:0 28px; }
-
-  /* Nav — same as homepage */
-  header{
-    position:sticky; top:0; z-index:20;
-    background:rgba(247,242,231,0.88);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:76px; }
-  .logo{ display:flex; align-items:center; gap:10px; font-size:1.05rem; text-decoration:none; }
-  .logo-mark{
-    width:26px; height:26px; border-radius:50%;
-    background:conic-gradient(from 210deg, #F3ECD9, #7FA36C, #2F3D26, #F3ECD9);
-    box-shadow:0 0 0 1px var(--line);
-  }
-  .logo b{ font-family:'Fraunces', serif; font-weight:600; font-size:1.1rem; letter-spacing:0.01em; }
-  .logo span{ color:var(--ink-faint); font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; display:block; margin-top:1px; }
-  nav ul{ list-style:none; display:flex; gap:32px; margin:0; padding:0; font-size:0.92rem; }
-  nav ul a{ text-decoration:none; color:var(--ink-dim); transition:color 0.2s; }
-  nav ul a:hover{ color:var(--accent); }
-  .nav-links{ display:flex; align-items:center; gap:24px; }
-  @media (max-width:720px){ .nav-links ul{ display:none; } }
-  .cart-link{ position:relative; display:inline-flex; align-items:center; color:var(--accent); text-decoration:none; }
-  .cart-badge{
-    position:absolute; top:-8px; right:-10px;
-    background:var(--accent); color:var(--bg);
-    font-family:'IBM Plex Mono', monospace; font-size:0.62rem; font-weight:600;
-    min-width:16px; height:16px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; padding:0 3px;
-  }
-
-  .btn{
-    font-family:'Work Sans', sans-serif; font-weight:600; font-size:0.92rem;
-    padding:13px 26px; border-radius:2px; border:1px solid transparent;
-    cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
-    transition:transform 0.15s ease, background 0.2s, border-color 0.2s;
-  }
-  .btn:hover{ transform:translateY(-1px); }
-  .btn-primary{ background:var(--accent); color:var(--bg); }
-  .btn-primary:hover{ background:#5A8A4A; }
-  .btn-ghost{ border-color:var(--line); color:var(--ink); }
-  .btn-ghost:hover{ border-color:var(--accent); color:var(--accent); }
-
-  /* Cart page */
-  .cart-page{ padding:64px 0 100px; }
-  .cart-page .eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.16em;
-    text-transform:uppercase; color:var(--accent); margin-bottom:10px; display:block;
-  }
-  .cart-page h1{ font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:40px; }
-
-  .cart-empty{ color:var(--ink-dim); padding:40px 0; }
-  .cart-empty a{ color:var(--accent); font-weight:600; text-decoration:underline; }
-
-  .cart-layout{ display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:start; }
-  @media (max-width:860px){ .cart-layout{ grid-template-columns:1fr; } }
-
-  .cart-list{ display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); }
-  .cart-item{ background:var(--bg); padding:20px; display:flex; gap:16px; align-items:center; }
-  .cart-item img{ width:64px; height:64px; border-radius:50%; object-fit:cover; background:var(--bg-panel-2); box-shadow:0 0 0 1px var(--line); flex:none; }
-  .cart-item-info{ flex:1; min-width:0; }
-  .cart-item-info .type{ display:block; font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-faint); }
-  .cart-item-info h3{ font-size:1.05rem; margin-top:2px; }
-  .cart-item-price{ color:var(--ink-dim); font-family:'IBM Plex Mono', monospace; font-size:0.85rem; margin-top:4px; }
-
-  .qty-control{ display:flex; align-items:center; gap:10px; flex:none; }
-  .qty-btn{
-    width:28px; height:28px; border-radius:2px; border:1px solid var(--accent);
-    background:transparent; color:var(--accent); font-size:1rem; font-family:'Work Sans',sans-serif; font-weight:600;
-    cursor:pointer; display:flex; align-items:center; justify-content:center;
-    transition:background 0.2s, color 0.2s;
-  }
-  .qty-btn:hover{ background:var(--accent); color:var(--bg); }
-  .qty-count{ font-family:'IBM Plex Mono', monospace; font-size:0.95rem; min-width:1.2em; text-align:center; }
-
-  .line-total{ font-family:'IBM Plex Mono', monospace; font-weight:600; min-width:64px; text-align:right; flex:none; }
-  .remove-btn{
-    background:none; border:none; color:var(--ink-faint); cursor:pointer; font-size:1.1rem;
-    padding:4px; line-height:1; flex:none;
-  }
-  .remove-btn:hover{ color:var(--accent); }
-
-  .summary{ background:var(--bg-panel); border:1px solid var(--line); padding:28px; }
-  .summary h2{ font-size:1.1rem; margin-bottom:20px; }
-  .summary-row{ display:flex; justify-content:space-between; font-size:0.92rem; color:var(--ink-dim); margin-bottom:10px; }
-  .summary-row.total{ color:var(--ink); font-weight:600; font-size:1.05rem; border-top:1px solid var(--line); padding-top:14px; margin-top:14px; }
-
-  /* Checkout form */
-  .checkout{ margin-top:56px; padding-top:56px; border-top:1px solid var(--line); }
-  .checkout h2{ font-size:1.4rem; margin-bottom:8px; }
-  .checkout > p{ color:var(--ink-dim); margin-bottom:28px; }
-  .checkout-form{ max-width:640px; display:flex; flex-direction:column; gap:20px; }
-  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-  @media (max-width:600px){ .form-row{ grid-template-columns:1fr; } }
-  .checkout-form label{
-    display:flex; flex-direction:column; gap:8px;
-    font-size:0.8rem; letter-spacing:0.04em; color:var(--ink-dim);
-  }
-  .checkout-form input{
-    font-family:'Work Sans', sans-serif; font-size:0.95rem; color:var(--ink);
-    background:var(--bg-panel); border:1px solid var(--line); border-radius:2px;
-    padding:11px 14px;
-  }
-  .checkout-form input:focus{ outline:none; border-color:var(--accent); }
-  .payment-note{
-    background:var(--accent-soft); border:1px solid var(--line); border-radius:2px;
-    padding:14px 16px; font-size:0.86rem; color:var(--ink-dim); line-height:1.5;
-  }
-  .checkout-form button{ align-self:flex-start; }
-  .form-note{ color:var(--ink-faint); font-size:0.85rem; margin:0; min-height:1.2em; }
-  .form-note.success{ color:var(--accent); font-weight:600; }
-  .form-note.error{ color:#D97A6C; font-weight:600; }
-
-  footer{ border-top:1px solid var(--line); background:var(--bg-panel); padding:40px 0; }
-  footer .fine{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color:var(--ink-faint); font-size:0.78rem; }
-  footer .fine a{ color:var(--ink-faint); }
-  footer .fine a:hover{ color:var(--accent); }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -196,29 +54,8 @@
   </div>
 </footer>
 
+<script src="cart.js"></script>
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
-
-const CART_KEY = "zitasCart";
-const CONTACT_EMAIL = "sinclairzita@hotmail.com";
-const WEB3FORMS_KEY = "f9b07fa7-40a6-4f3f-a4a2-2e41d4ac0a3d";
-
-function getCart(){
-  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
-  catch { return []; }
-}
-
-function saveCart(cart){
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  updateCartBadge();
-}
-
-function updateCartBadge(){
-  const badge = document.getElementById('cart-count');
-  if (!badge) return;
-  badge.textContent = getCart().reduce((sum, item) => sum + item.qty, 0);
-}
-
 function setQty(name, qty){
   const cart = getCart();
   const idx = cart.findIndex(i => i.name === name);
@@ -317,7 +154,6 @@ function render(){
     const total = currentCart.reduce((sum, i) => sum + i.price * i.qty, 0);
 
     const data = new FormData();
-    data.append("access_key", WEB3FORMS_KEY);
     data.append("subject", `Order request from ${form.name.value}`);
     data.append("name", form.name.value);
     data.append("email", form.email.value);
@@ -329,24 +165,16 @@ function render(){
     status.className = "form-note";
     status.textContent = "Sending...";
 
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: data });
-      const result = await res.json();
-      if (result.success){
-        saveCart([]);
-        container.innerHTML = `<p class="cart-empty">Order request sent — we'll be in touch to arrange payment. <a href="index.html#buy">Continue shopping</a>.</p>`;
-      } else {
-        status.className = "form-note error";
-        status.textContent = `Couldn't send that, please email us directly at ${CONTACT_EMAIL}.`;
-      }
-    } catch {
+    if (await sendForm(data)){
+      saveCart([]);
+      container.innerHTML = `<p class="cart-empty">Order request sent — we'll be in touch to arrange payment. <a href="index.html#buy">Continue shopping</a>.</p>`;
+    } else {
       status.className = "form-note error";
       status.textContent = `Couldn't send that, please email us directly at ${CONTACT_EMAIL}.`;
     }
   });
 }
 
-updateCartBadge();
 render();
 </script>
 
