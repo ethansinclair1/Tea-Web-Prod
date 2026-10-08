@@ -13,6 +13,8 @@
 </head>
 <body>
 
+<div class="announce">Small batches only &mdash; when a tea sells out it&rsquo;s back next harvest</div>
+
 <header>
   <nav class="wrap">
     <a href="#top" class="logo">
@@ -51,19 +53,25 @@
     <path d="M30 2 C55 25 55 75 30 98 C5 75 5 25 30 2 Z"/>
     <path class="vein" d="M30 8 L30 92"/>
   </svg>
-  <svg class="leaf-deco" style="width:130px; bottom:-30px; right:-30px; transform:rotate(160deg);" viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
-    <path d="M30 2 C55 25 55 75 30 98 C5 75 5 25 30 2 Z"/>
-    <path class="vein" d="M30 8 L30 92"/>
-  </svg>
   <div class="wrap hero-grid">
-    <div>
+    <div class="hero-text">
       <span class="eyebrow">Small-batch · loose leaf · steeped to order</span>
       <h1>Good things, <em>steeped slowly.</em></h1>
       <p class="lede">We've spent years perfecting small batches, steeped one cup at a time.</p>
       <div class="hero-ctas">
-        <a href="#buy" class="btn btn-primary">Buy now</a>
-        <a href="#about" class="btn btn-ghost">How we source</a>
+        <a href="#buy" class="btn btn-primary">Shop the teas</a>
+        <a href="#instructions" class="btn btn-ghost">How to brew</a>
       </div>
+      <ul class="hero-facts">
+        <li><b class="mono">6</b><span>teas, white to herbal</span></li>
+        <li><b class="mono">48h</b><span>weighed &amp; sealed</span></li>
+        <li><b class="mono">50g</b><span>resealable pouches</span></li>
+      </ul>
+    </div>
+    <!-- arch shaped photo frame, the shape is just border-radius on the top -->
+    <div class="hero-photo">
+      <img src="prod1.jpg" alt="A glass cup of amber tea with white flowers floating on top">
+      <span class="hero-badge">Tasted by Zita<br>before every batch</span>
     </div>
   </div>
 </section>
@@ -76,7 +84,7 @@
     </div>
     <div class="ritual-item">
       <span class="num mono">02</span>
-      <div><h3>Checkout with Stripe</h3><p>Card payment happens on Stripe's own secure page. We never see or store your card details.</p></div>
+      <div><h3>Send your order</h3><p>Add teas to your cart and send the order over. We'll get back to you to sort out payment.</p></div>
     </div>
     <div class="ritual-item">
       <span class="num mono">03</span>
@@ -199,7 +207,7 @@
     </div>
     <div class="fine">
       <span>© <span id="year"></span> Zita's Teas. All rights reserved.</span>
-      <span>Payments securely processed by Stripe.</span>
+      <span>Made in small batches.</span>
     </div>
   </div>
 </footer>
