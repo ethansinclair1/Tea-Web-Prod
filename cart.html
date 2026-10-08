@@ -23,7 +23,8 @@
     </a>
     <div class="nav-links">
       <ul id="nav-menu">
-        <li><a href="index.html#buy">Buy</a></li>
+        <li><a href="index.html#buy">Shop</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
@@ -51,10 +52,36 @@
   </div>
 </section>
 
-<footer>
-  <div class="wrap fine">
-    <span>© <span id="year"></span> Zita's Teas. All rights reserved.</span>
-    <a href="index.html">Back to shop</a>
+<footer id="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Zita's Teas</h4>
+        <p>Enter address</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html#buy">Buy</a></li>
+          <li><a href="index.html#instructions">Instructions</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#creator">Creator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="mailto:sinclairzita@hotmail.com">sinclairzita@hotmail.com</a></li>
+          <li><a href="policies.html#shipping">Shipping &amp; returns</a></li>
+          <li><a href="policies.html#privacy">Privacy policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fine">
+      <span>© <span id="year"></span> Zita's Teas. All rights reserved.</span>
+      <span>Made in small batches.</span>
+    </div>
   </div>
 </footer>
 
@@ -109,7 +136,7 @@ function render(){
       <div class="summary">
         <h2>Order summary</h2>
         <div class="summary-row"><span>Subtotal</span><span>£${subtotal.toFixed(2)}</span></div>
-        <div class="summary-row"><span>Shipping</span><span>Calculated at checkout</span></div>
+        <div class="summary-row"><span>Shipping</span><span>Confirmed by email</span></div>
         <div class="summary-row total"><span>Total</span><span>£${subtotal.toFixed(2)}</span></div>
       </div>
     </div>
@@ -127,7 +154,7 @@ function render(){
           <label>City<input type="text" name="city" required></label>
           <label>Postcode<input type="text" name="postcode" required></label>
         </div>
-        <div class="payment-note">Card payment will be handled securely by Stripe once it's connected. For now, sending this places an order request — we won't charge you anything here.</div>
+        <div class="payment-note">See <a href="policies.html#shipping">shipping &amp; returns</a> before ordering. Card payment will be handled securely by Stripe once it's connected. For now, sending this places an order request — we won't charge you anything here.</div>
         <button type="submit" class="btn btn-primary">Place order</button>
         <p class="form-note" id="checkout-status"></p>
       </form>
