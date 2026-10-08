@@ -23,7 +23,7 @@
       </span>
     </a>
     <div class="nav-links">
-      <ul>
+      <ul id="nav-menu">
         <li><a href="#instructions">Instructions</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#creator">Creator</a></li>
@@ -38,6 +38,10 @@
         </svg>
         <span class="cart-badge" id="cart-count">0</span>
       </a>
+      <!-- only shows on small screens, see style.css -->
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 </header>

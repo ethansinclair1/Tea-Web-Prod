@@ -50,7 +50,7 @@ nav.wrap{
   display:flex; align-items:center; justify-content:space-between;
   height:76px;
 }
-.logo{ display:flex; align-items:center; gap:10px; font-size:1.05rem; }
+.logo{ display:flex; align-items:center; gap:10px; font-size:1.05rem; text-decoration:none; }
 .logo-mark{
   width:26px; height:26px; border-radius:50%;
   background:conic-gradient(from 210deg, #F3ECD9, #7FA36C, #2F3D26, #F3ECD9);
@@ -62,7 +62,6 @@ nav ul{ list-style:none; display:flex; gap:32px; margin:0; padding:0; font-size:
 nav ul a{ text-decoration:none; color:var(--ink-dim); transition:color 0.2s; }
 nav ul a:hover{ color:var(--accent); }
 .nav-links{ display:flex; align-items:center; gap:24px; }
-@media (max-width:720px){ .nav-links ul{ display:none; } }
 .cart-link{ position:relative; display:inline-flex; align-items:center; color:var(--ink); text-decoration:none; }
 .cart-link:hover{ color:var(--accent); }
 .cart-badge{
@@ -71,6 +70,34 @@ nav ul a:hover{ color:var(--accent); }
   font-family:'IBM Plex Mono', monospace; font-size:0.62rem; font-weight:600;
   min-width:16px; height:16px; border-radius:50%;
   display:flex; align-items:center; justify-content:center; padding:0 3px;
+}
+
+/* hide the badge when cart is empty */
+.cart-badge[hidden]{ display:none; }
+
+/* mobile menu - hamburger button + dropdown panel */
+.menu-toggle{
+  display:none; width:36px; height:36px; padding:8px 6px;
+  background:none; border:1px solid var(--line); border-radius:2px; cursor:pointer;
+  flex-direction:column; justify-content:space-between;
+}
+.menu-toggle span{ display:block; height:2px; background:var(--ink); transition:transform 0.2s, opacity 0.2s; }
+.menu-toggle[aria-expanded="true"] span:nth-child(1){ transform:translateY(8px) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.menu-toggle[aria-expanded="true"] span:nth-child(3){ transform:translateY(-8px) rotate(-45deg); }
+
+@media (max-width:720px){
+  .menu-toggle{ display:flex; }
+  .nav-links{ gap:18px; }
+  .nav-links ul{
+    display:none;
+    position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; gap:0;
+    background:var(--bg); border-bottom:1px solid var(--line);
+    box-shadow:0 12px 24px rgba(43,54,38,0.08);
+  }
+  .nav-links ul.open{ display:flex; }
+  .nav-links ul a{ display:block; padding:16px 28px; border-top:1px solid var(--line); font-size:1rem; }
 }
 
 /* ---------- Leaf decorations ---------- */

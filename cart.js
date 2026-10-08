@@ -48,4 +48,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
   updateCartBadge();
+
+  // mobile menu toggle
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('nav-menu');
+  if (toggle && menu){
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    // close it again after picking a link
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+    }));
+  }
 });
