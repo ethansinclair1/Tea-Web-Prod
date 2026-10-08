@@ -4,7 +4,7 @@ Tea shop site. Three pages (index.html, cart.html, policies.html), no backend, h
 
 ## Files
 
-- `index.html` - homepage: hero, shop grid with filters, brew instructions, FAQ, about, Zita, contact form. The tea list is the `PRODUCTS` array near the bottom
+- `index.html` - homepage: hero, scrolling strip, shop-by-mood tiles, shop grid with filters, brew instructions, FAQ, about, Zita, contact form. The tea list is the `PRODUCTS` array near the bottom
 - `cart.html` - cart + order request form
 - `policies.html` - shipping, returns and privacy. Fill in the "Enter ..." bits
 - `style.css` - all the styling, shared by every page
@@ -23,6 +23,10 @@ To eventually take real card payments off the cart, you'd want either:
 - Payment Links per tea if you want something simpler but less integrated with the cart
 
 Stripe onboarding might ask for a VAT number under "additional information" - leave it blank unless you're actually VAT registered, that's not needed to accept payments.
+
+## Newsletter
+
+The signup box in the footer goes through web3forms too, so each signup lands in the inbox as an email saying who to add. There's no mailing list service hooked up, so keep a list of them somewhere (or plug in Mailchimp/Buttondown later).
 
 ## Contact form
 
