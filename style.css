@@ -349,6 +349,19 @@ nav ul a:hover{ color:var(--accent); }
 .about h2{ font-size:clamp(1.8rem,3vw,2.3rem); max-width:14ch; }
 .about p{ color:var(--ink-dim); line-height:1.7; margin-top:18px; }
 
+.values{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:40px;
+  margin-top:72px; padding-top:48px; border-top:1px solid var(--line);
+}
+@media (max-width:800px){ .values{ grid-template-columns:1fr; gap:28px; } }
+.value svg{
+  width:40px; height:40px; padding:9px; border-radius:50%;
+  background:var(--accent-soft); fill:none; stroke:var(--accent); stroke-width:1.6;
+  stroke-linecap:round; stroke-linejoin:round;
+}
+.value h3{ font-size:1.15rem; margin-top:14px; }
+.value p{ margin-top:6px !important; font-size:0.92rem; }
+
 /* ---------- Creator ---------- */
 .creator{ padding:90px 0; border-top:1px solid var(--line); position:relative; overflow:hidden; }
 .creator-grid{ position:relative; z-index:1; display:flex; gap:40px; align-items:center; flex-wrap:wrap; }
@@ -384,6 +397,22 @@ nav ul a:hover{ color:var(--accent); }
 .form-note.error{ color:#D97A6C; font-weight:600; }
 
 /* ---------- Footer ---------- */
+.sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+footer{ padding-top:0 !important; }
+.newsletter{ background:var(--ink); color:var(--bg); padding:48px 0; margin-bottom:56px; }
+.newsletter-inner{ display:flex; justify-content:space-between; align-items:center; gap:32px; flex-wrap:wrap; }
+.newsletter h3{ font-size:1.6rem; }
+.newsletter p{ color:rgba(247,242,231,0.7) !important; margin-top:6px !important; }
+.newsletter-form{ display:flex; gap:10px; flex-wrap:wrap; flex:1; max-width:460px; }
+.newsletter-form input{
+  flex:1; min-width:200px; font-family:'Work Sans', sans-serif; font-size:0.95rem;
+  padding:12px 18px; border-radius:999px; border:1px solid rgba(247,242,231,0.3);
+  background:transparent; color:var(--bg);
+}
+.newsletter-form input::placeholder{ color:rgba(247,242,231,0.55); }
+.newsletter-form input:focus{ outline:none; border-color:var(--accent); }
+.newsletter-form .btn{ border-radius:999px; }
+.newsletter-form .form-note{ flex-basis:100%; }
 footer{ border-top:1px solid var(--line); background:var(--bg-panel); padding:56px 0 32px; }
 .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; }
 @media (max-width:720px){ .footer-grid{ grid-template-columns:1fr; gap:30px; } }

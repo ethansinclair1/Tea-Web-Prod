@@ -49,6 +49,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (year) year.textContent = new Date().getFullYear();
   updateCartBadge();
 
+  // newsletter signup in the footer (on every page)
+  const nl = document.getElementById('newsletter-form');
+  if (nl){
+    nl.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('newsletter-status');
+      const data = new FormData(nl);
+      data.append("subject", "New newsletter signup");
+      data.append("message", `Add ${nl.email.value} to the new teas mailing list`);
+      status.className = "form-note";
+      status.textContent = "Signing you up...";
+      if (await sendForm(data)){
+        nl.reset();
+        status.className = "form-note success";
+        status.textContent = "You're on the list.";
+      } else {
+        status.className = "form-note error";
+        status.textContent = "That didn't go through, try again in a bit.";
+      }
+    });
+  }
+
   // mobile menu toggle
   const toggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('nav-menu');

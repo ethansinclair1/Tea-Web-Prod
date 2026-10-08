@@ -209,6 +209,24 @@
       <p>Every tea on this page is one we drink at home. If a lot doesn't taste right, it doesn't go up for sale.</p>
     </div>
   </div>
+  <!-- simple icon row, icons are inline svg so nothing extra to load -->
+  <div class="wrap values">
+    <div class="value">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c4 3 6 7 6 10a6 6 0 0 1-12 0c0-3 2-7 6-10z"/><path d="M12 9v11"/></svg>
+      <h3>Whole leaf</h3>
+      <p>No dusty teabag fannings, just leaves that open up properly in the pot.</p>
+    </div>
+    <div class="value">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>
+      <h3>Packed fresh</h3>
+      <p>Weighed and sealed within 48 hours, not sat in a warehouse for months.</p>
+    </div>
+    <div class="value">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3v3M12 3v3"/></svg>
+      <h3>Tasted first</h3>
+      <p>Zita brews every batch herself before it goes up for sale.</p>
+    </div>
+  </div>
 </section>
 
 <section class="creator" id="creator">
@@ -247,6 +265,21 @@
 </section>
 
 <footer id="footer">
+  <!-- newsletter - just goes through web3forms like the contact form -->
+  <div class="newsletter">
+    <div class="wrap newsletter-inner">
+      <div>
+        <h3>Hear when new teas land</h3>
+        <p>Small batches sell out. Get an email when there's something new, nothing else.</p>
+      </div>
+      <form class="newsletter-form" id="newsletter-form">
+        <label class="sr-only" for="nl-email">Email address</label>
+        <input type="email" id="nl-email" name="email" placeholder="Your email" required>
+        <button type="submit" class="btn btn-primary">Sign up</button>
+        <p class="form-note" id="newsletter-status"></p>
+      </form>
+    </div>
+  </div>
   <div class="wrap">
     <div class="footer-grid">
       <div>
