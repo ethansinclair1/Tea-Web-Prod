@@ -173,15 +173,46 @@ nav ul a:hover{ color:var(--accent); }
 .btn-ghost{ border-color:var(--line); color:var(--ink); }
 .btn-ghost:hover{ border-color:var(--accent); color:var(--accent); }
 
-/* ---------- Ritual strip ---------- */
-.ritual{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-panel); }
-.ritual .wrap{
-  padding:34px 28px; display:flex; gap:48px; flex-wrap:wrap; justify-content:space-between;
+/* ---------- Marquee ---------- */
+.marquee{
+  overflow:hidden; white-space:nowrap;
+  background:var(--accent); color:var(--bg);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line);
 }
-.ritual-item{ display:flex; gap:14px; max-width:280px; }
-.ritual-item .num{ font-family:'IBM Plex Mono', monospace; color:var(--accent); font-size:0.85rem; padding-top:2px; }
-.ritual-item h3{ font-size:0.98rem; font-weight:600; font-family:'Work Sans', sans-serif; margin-bottom:4px; }
-.ritual-item p{ margin:0; color:var(--ink-faint); font-size:0.86rem; line-height:1.5; }
+.marquee-track{ display:inline-flex; animation:marquee 32s linear infinite; }
+.marquee span{
+  padding:14px 28px; font-family:'Fraunces', serif; font-style:italic; font-size:1.05rem;
+  display:inline-flex; align-items:center; gap:28px;
+}
+.marquee span::after{ content:"\2726"; font-style:normal; font-size:0.7rem; opacity:0.7; }
+.marquee:hover .marquee-track{ animation-play-state:paused; }
+@keyframes marquee{ to{ transform:translateX(-50%); } }
+
+/* ---------- Shop by tiles ---------- */
+.shop-by{ padding:88px 0 0; }
+.section-head.center{ text-align:center; margin-left:auto; margin-right:auto; }
+.tiles{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+@media (max-width:900px){ .tiles{ grid-template-columns:repeat(2,1fr); } }
+.tile{
+  position:relative; overflow:hidden; aspect-ratio:1/1;
+  border-radius:4px; text-decoration:none;
+  display:flex; flex-direction:column; justify-content:flex-end; padding:22px;
+  transition:transform 0.2s;
+}
+.tile:hover{ transform:translateY(-4px); }
+.tile svg{
+  position:absolute; width:55%; top:-8%; right:-6%; transform:rotate(30deg);
+  opacity:0.35; transition:transform 0.4s;
+}
+.tile:hover svg{ transform:rotate(40deg) scale(1.05); }
+.tile svg path{ fill:currentColor; }
+.tile svg .vein{ fill:none; stroke:rgba(255,255,255,0.5); stroke-width:1.5; }
+.tile-name{ position:relative; font-family:'Fraunces', serif; font-size:1.35rem; font-weight:600; }
+.tile-sub{ position:relative; font-size:0.82rem; opacity:0.8; margin-top:4px; }
+.tile-light{ background:#DCE8C9; color:#3E5A30; }
+.tile-rich { background:#8A4B2A; color:#F7E9DA; }
+.tile-calm { background:#E9D7E4; color:#6B3E5E; }
+.tile-all  { background:var(--ink); color:var(--bg); }
 
 /* ---------- Catalog ---------- */
 .catalog{ padding:96px 0 40px; }

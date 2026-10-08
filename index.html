@@ -77,19 +77,41 @@
   </div>
 </section>
 
-<section class="ritual">
+<!-- scrolling strip, the list is in there twice so the loop looks seamless -->
+<div class="marquee" aria-label="Why Zita's Teas">
+  <div class="marquee-track">
+    <span>Loose leaf only</span><span>Small batches</span><span>Tasted before it's sold</span><span>Weighed &amp; sealed within 48h</span><span>Resealable pouches</span><span>Brew guide on every tea</span>
+    <span aria-hidden="true" class="dup">Loose leaf only</span><span aria-hidden="true" class="dup">Small batches</span><span aria-hidden="true" class="dup">Tasted before it's sold</span><span aria-hidden="true" class="dup">Weighed &amp; sealed within 48h</span><span aria-hidden="true" class="dup">Resealable pouches</span><span aria-hidden="true" class="dup">Brew guide on every tea</span>
+  </div>
+</div>
+
+<section class="shop-by">
   <div class="wrap">
-    <div class="ritual-item">
-      <span class="num mono">01</span>
-      <div><h3>Pick a leaf</h3><p>Each tea shows the water temperature and steep time right on the photo.</p></div>
+    <div class="section-head center">
+      <span class="eyebrow mono">Not sure where to start?</span>
+      <h2>Shop by mood</h2>
     </div>
-    <div class="ritual-item">
-      <span class="num mono">02</span>
-      <div><h3>Send your order</h3><p>Add teas to your cart and send the order over. We'll get back to you to sort out payment.</p></div>
-    </div>
-    <div class="ritual-item">
-      <span class="num mono">03</span>
-      <div><h3>Steeped &amp; shipped</h3><p>Weighed and sealed within 48 hours of your order, in resealable pouches.</p></div>
+    <div class="tiles">
+      <a href="#buy" class="tile tile-light" data-filter="light">
+        <svg viewBox="0 0 60 100" aria-hidden="true"><path d="M30 2 C55 25 55 75 30 98 C5 75 5 25 30 2 Z"/><path class="vein" d="M30 8 L30 92"/></svg>
+        <span class="tile-name">Light &amp; fresh</span>
+        <span class="tile-sub">White &amp; green</span>
+      </a>
+      <a href="#buy" class="tile tile-rich" data-filter="rich">
+        <svg viewBox="0 0 60 100" aria-hidden="true"><path d="M30 2 C55 25 55 75 30 98 C5 75 5 25 30 2 Z"/><path class="vein" d="M30 8 L30 92"/></svg>
+        <span class="tile-name">Rich &amp; toasty</span>
+        <span class="tile-sub">Oolong, black &amp; pu-erh</span>
+      </a>
+      <a href="#buy" class="tile tile-calm" data-filter="nocaff">
+        <svg viewBox="0 0 60 100" aria-hidden="true"><path d="M30 2 C55 25 55 75 30 98 C5 75 5 25 30 2 Z"/><path class="vein" d="M30 8 L30 92"/></svg>
+        <span class="tile-name">Caffeine-free</span>
+        <span class="tile-sub">Herbal blends</span>
+      </a>
+      <a href="#buy" class="tile tile-all" data-filter="all">
+        <svg viewBox="0 0 60 100" aria-hidden="true"><path d="M30 2 C55 25 55 75 30 98 C5 75 5 25 30 2 Z"/><path class="vein" d="M30 8 L30 92"/></svg>
+        <span class="tile-name">Everything</span>
+        <span class="tile-sub">All six teas</span>
+      </a>
     </div>
   </div>
 </section>
@@ -425,6 +447,14 @@ document.querySelectorAll('#filters .chip').forEach(chip => {
     document.querySelectorAll('#product-grid .card').forEach(card => {
       card.hidden = !(f === 'all' || card.dataset.group === f);
     });
+  });
+});
+
+// shop-by tiles - pick the matching filter then the link scrolls down to the shop
+document.querySelectorAll('.tile').forEach(tile => {
+  tile.addEventListener('click', () => {
+    const chip = document.querySelector(`#filters .chip[data-filter="${tile.dataset.filter}"]`);
+    if (chip) chip.click();
   });
 });
 
