@@ -100,6 +100,12 @@
       <h2>Our teas</h2>
       <p>Every card lists the leaf amount, water temperature, and steep time — start there, then adjust to taste. The ring around each disc fills to show steep time on a 0–6 minute scale.</p>
     </div>
+    <div class="filters" id="filters" role="group" aria-label="Filter teas">
+      <button type="button" class="chip active" data-filter="all">All teas</button>
+      <button type="button" class="chip" data-filter="light">Light &amp; fresh</button>
+      <button type="button" class="chip" data-filter="rich">Rich &amp; toasty</button>
+      <button type="button" class="chip" data-filter="nocaff">Caffeine-free</button>
+    </div>
     <div class="grid" id="product-grid"></div>
   </div>
 </section>
@@ -212,6 +218,8 @@
   </div>
 </footer>
 
+<div class="toast" id="toast" role="status"><span></span><a href="cart.html">View cart</a></div>
+
 <script src="cart.js"></script>
 <script>
 function getQty(name){
@@ -235,6 +243,7 @@ function setQty(product, qty){
 const PRODUCTS = [
   {
     name: "Tea One",
+    group: "light",
     type: "White tea",
     image: "prod1.jpg",
     tagline: "Enter tagline",
@@ -245,6 +254,7 @@ const PRODUCTS = [
   },
   {
     name: "Tea Two",
+    group: "light",
     type: "Green tea",
     image: "prod2.jpg",
     tagline: "Enter tagline",
@@ -255,6 +265,7 @@ const PRODUCTS = [
   },
   {
     name: "Tea Three",
+    group: "rich",
     type: "Oolong tea",
     image: "prod3.jpg",
     tagline: "Enter tagline",
@@ -265,6 +276,7 @@ const PRODUCTS = [
   },
   {
     name: "Tea Four",
+    group: "rich",
     type: "Black tea",
     image: "prod4.jpg",
     tagline: "Enter tagline",
@@ -275,6 +287,7 @@ const PRODUCTS = [
   },
   {
     name: "Tea Five",
+    group: "rich",
     type: "Pu-erh tea",
     image: "prod5.jpg",
     tagline: "Enter tagline",
@@ -285,6 +298,7 @@ const PRODUCTS = [
   },
   {
     name: "Tea Six",
+    group: "nocaff",
     type: "Herbal blend",
     image: "prod6.jpg",
     tagline: "Enter tagline",
@@ -318,10 +332,10 @@ function caffeineDots(level){
 
 function productCard(p){
   return `
-    <article class="card">
+    <article class="card" data-group="${p.group}" data-caff="${p.caffeine}">
       <div class="card-top">
         <div class="disc-wrap">
-          <div class="disc"><img src="${p.image}" alt="${p.type}"></div>
+          <div class="disc"><img src="${p.image}" alt="${p.type}" loading="lazy"></div>
           ${discRingSVG(p.steepMinutes)}
         </div>
         <div class="card-title">
@@ -342,9 +356,9 @@ function productCard(p){
           ${caffeineDots(p.caffeine)}
         </div>
         <div class="qty-control" data-name="${p.name}">
-          <button class="qty-btn minus" type="button">−</button>
-          <span class="qty-count">${getQty(p.name)}</span>
-          <button class="qty-btn plus" type="button">+</button>
+          <button class="qty-btn minus" type="button" aria-label="Remove one ${p.name}">−</button>
+          <span class="qty-count" aria-live="polite">${getQty(p.name)}</span>
+          <button class="qty-btn plus" type="button" aria-label="Add one ${p.name}">+</button>
         </div>
       </div>
     </article>`;
@@ -361,6 +375,7 @@ document.querySelectorAll('.qty-control').forEach(control => {
     const qty = getQty(name) + 1;
     setQty(product, qty);
     countEl.textContent = qty;
+    showToast(`${name} added to cart`);
   });
 
   control.querySelector('.minus').addEventListener('click', () => {
@@ -370,6 +385,29 @@ document.querySelectorAll('.qty-control').forEach(control => {
   });
 });
 
+
+// ---- filters ----
+document.querySelectorAll('#filters .chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('#filters .chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const f = chip.dataset.filter;
+    document.querySelectorAll('#product-grid .card').forEach(card => {
+      card.hidden = !(f === 'all' || card.dataset.group === f);
+    });
+  });
+});
+
+// ---- toast ----
+// small popup bottom of screen when something gets added, with a link to the cart
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.querySelector('span').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+}
 
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
   e.preventDefault();
