@@ -1,6 +1,14 @@
 # Zita's Teas
 
-Tea shop site. Two pages (index.html, cart.html), no backend, hosted on GitHub Pages.
+Tea shop site. Three pages (index.html, cart.html, policies.html), no backend, hosted on GitHub Pages.
+
+## Files
+
+- `index.html` - homepage: hero, shop grid with filters, brew instructions, FAQ, about, Zita, contact form. The tea list is the `PRODUCTS` array near the bottom
+- `cart.html` - cart + order request form
+- `policies.html` - shipping, returns and privacy. Fill in the "Enter ..." bits
+- `style.css` - all the styling, shared by every page
+- `cart.js` - shared cart functions, mobile menu, the web3forms send helper. `CONTACT_EMAIL` and `WEB3FORMS_KEY` live here now (one place instead of two)
 
 Live at: https://ethansinclair1.github.io/Tea-Web-Prod/
 
@@ -18,15 +26,15 @@ Stripe onboarding might ask for a VAT number under "additional information" - le
 
 ## Contact form
 
-Actually delivers to whatever inbox the `WEB3FORMS_KEY` access key is registered to - right now that's still ethansinclair123456789@gmail.com, since that key was created for that address. The `CONTACT_EMAIL` constant in index.html/cart.html is now sinclairzita@hotmail.com, but changing that constant alone doesn't move where submissions land - it only affects the mailto fallback and error message text. To actually redirect form deliveries to sinclairzita@hotmail.com, get a new access key from web3forms.com for that address and swap `WEB3FORMS_KEY` in both index.html and cart.html.
+Actually delivers to whatever inbox the `WEB3FORMS_KEY` access key is registered to - right now that's still ethansinclair123456789@gmail.com, since that key was created for that address. The `CONTACT_EMAIL` constant in cart.js is now sinclairzita@hotmail.com, but changing that constant alone doesn't move where submissions land - it only affects the mailto fallback and error message text. To actually redirect form deliveries to sinclairzita@hotmail.com, get a new access key from web3forms.com for that address and swap `WEB3FORMS_KEY` in cart.js.
 
 ## Images to add
 
-Drop these straight into the Tea Web folder, next to index.html, exact filenames below. They'll show up automatically next push - until then they show as a broken image icon.
+Drop these straight into the Tea Web folder, next to index.html, exact filenames below. They'll show up automatically next push - until then they show as a broken image icon. Keep them under ~1000px wide or they slow the page down a lot (the originals were 1MB+ each).
 
 - `creator.jpg` - Zita's photo in the Meet Zita section
 - `tea-bg.jpg` - background photo behind the About section
-- `prod1.jpg` - Tea One (white tea)
+- `prod1.jpg` - Tea One (white tea), also used for the big hero photo and favicon
 - `prod2.jpg` - Tea Two (green tea)
 - `prod3.jpg` - Tea Three (oolong tea)
 - `prod4.jpg` - Tea Four (black tea)
@@ -48,7 +56,7 @@ Pages redeploys automatically after a push, usually within a minute.
 - wire up real Stripe payments off the cart (see Cart and checkout above)
 - Stripe needs your bank details etc before it'll pay out
 - check food/cottage licensing rules for where you live, tea counts as a consumable
-- write real privacy + shipping/returns pages (footer links are placeholders)
+- fill in the placeholders on policies.html (postage, delivery times, returns)
 - sort sales tax / Stripe Tax
 - replace the footer email/address with real ones
 - add the real photos (see Images to add above)
